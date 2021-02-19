@@ -7,6 +7,16 @@
 
 import Foundation
 import SwiftUI
+import RealmSwift
+
+extension Results {
+    func toArray() -> [Element] {
+        return compactMap {
+            $0
+        }
+    }
+}
+
 
 class MatchModel : ObservableObject{
     let matchAbstractURL = "https://api.opendota.com/api/players/"
@@ -21,6 +31,56 @@ class MatchModel : ObservableObject{
     @Published var isLoadingMatches = false
     @Published var matches: [DotaMatchElement] = []
     
+    var realm: Realm?
+//    var token: NotificationToken?
+    
+    init() {
+    
+            self.realm = try! Realm()
+           
+       
+    }
+    
+    /**
+     Add Match to DB
+     */
+    func storeMatchIntoDB(match: MatchDetails){
+        do{
+            try realm?.write{
+                if let playerId = selectedPlayer{
+                    let matchDB = match.toDB(playerId: playerId)
+                    realm?.add(matchDB)
+
+                    let index = matches.firstIndex{ m in m.id == match.matchID }
+                    matches[index!] = match.toAbstractMatch(playerID: playerId)
+                }
+               
+            }
+        } catch{
+            print("Cannot add match to DB")
+        }
+    }
+    
+    /**
+     Load matches from database
+     */
+    func loadMatchesFromDB(playerId: String){
+        let results = realm?.objects(MatchDetailsDB.self).filter("playerId = '\(playerId)'").sorted(byKeyPath: "startTime")
+        if let results = results{
+            let histories: [DotaMatchElement] = results.map{ r in MatchDetails(from: r).toAbstractMatch(playerID: playerId) }
+            matches = histories
+        }
+    }
+    
+    func loadMatchFromDB(matchId: Int) -> MatchDetails?{
+        let result = realm?.objects(MatchDetailsDB.self).filter("matchID = \(matchId)").first
+        if let result = result{
+            return MatchDetails(from: result)
+        }
+        return nil
+    }
+    
+    
     func getHeroById(_ heroId: String) -> DotaHero?{
         return heroData[heroId]
     }
@@ -33,15 +93,14 @@ class MatchModel : ObservableObject{
         return gameModeData[gameMode]
     }
     
-    func findMatchById(_ matchId: String, playerID: String){
+    /**
+     Show Search result. It may return a empty match if no match id matched
+     */
+    func searchMatchById(_ matchId: String, completion: @escaping ( MatchDetails) -> Void ){
         guard let url = URL(string: "\(searchURL)\(matchId)" ) else {
             return
         }
         
-        withAnimation{
-            isLoadingMatches = true
-        }
- 
         URLSession.shared.dataTask(with: url){
             (data, resp, err) in
             
@@ -54,24 +113,26 @@ class MatchModel : ObservableObject{
             DispatchQueue.main.async {
                 do{
                 let match = try JSONDecoder().decode(MatchDetails.self, from: data)
-                withAnimation{
-                    self.matches = [match.toAbstractMatch(playerID: playerID)]
-                    self.isLoadingMatches = false
-                }
+                completion(match)
                 } catch{
                     let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                    withAnimation{
-               
-                        self.isLoadingMatches = false
-                    }
+                    print("Unresolved error \(nsError), \(nsError.userInfo)")
                 }
-            
             }
         }.resume()
     }
     
-    func findMatchDetailsById(_ matchId: String, playerID: String, completion: @escaping (MatchDetails) -> Void ){
+    /**
+     Get match data. If match exist in DB, then return the data from DB, otherwise, use network result
+     */
+    func findMatchDetailsById(_ matchId: Int, playerID: String?, completion: @escaping (MatchDetails) -> Void ){
+        let history = loadMatchFromDB(matchId: matchId)
+        if let history = history{
+            completion(history)
+            return
+        }
+        
+        
         guard let url = URL(string: "\(searchURL)\(matchId)" ) else {
             return
         }
@@ -86,9 +147,10 @@ class MatchModel : ObservableObject{
                 
             }
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 do{
                 let match = try JSONDecoder().decode(MatchDetails.self, from: data)
+                    self.storeMatchIntoDB(match: match)
                     completion(match)
                 } catch{
                     let nsError = error as NSError
@@ -100,13 +162,15 @@ class MatchModel : ObservableObject{
         }.resume()
     }
     
+    /**
+     Get list of match summary user played recently
+     */
     func findMatchByPlayer(playerId: String){
         guard let url = URL(string: "\(matchAbstractURL)\(playerId)/recentMatches" ) else {
             return
         }
-        
+        loadMatchesFromDB(playerId: playerId)
       
-        
         withAnimation{
             isLoadingMatches = true
             selectedPlayer = playerId
@@ -125,7 +189,20 @@ class MatchModel : ObservableObject{
             DispatchQueue.main.async {
                 do{
                 let matches = try JSONDecoder().decode([DotaMatchElement].self, from: data)
-                self.matches = matches
+                    let tmp = matches.filter{
+                        match in
+                        let contained = self.matches.contains{
+                            m in
+                            m.id == match.id
+                        }
+                        
+                        return !contained
+                    }
+                    
+                    tmp.forEach{
+                        m in
+                        self.matches.append(m)
+                    }
                 withAnimation{
                    
                     self.isLoadingMatches = false

@@ -22,6 +22,11 @@ struct MatchHistoryRow: View {
         VStack(alignment: .leading) {
             HStack{
                 Text("MatchID")
+                if match.inDB{
+                    Text("Viewed")
+                        .padding(5)
+                        .background(Capsule().foregroundColor(.blue))
+                }
                 Spacer()
                 Text("\(String(match.id ?? 0))")
             }
@@ -80,7 +85,7 @@ struct MatchHistoryRow: View {
 
 struct MatchHistoryRow_Previews: PreviewProvider {
     static var previews: some View {
-        MatchHistoryRow(match: DotaMatchElement(id: 12345, playerSlot: 3, radiantWin: true, duration: 3005, gameMode: 22, lobbyType: 0, heroID: 16, startTime: 1607233132, version: nil, kills: 4, deaths: 7, assists: 29, skill: nil, partySize: 2, heroes: nil) )
+        MatchHistoryRow(match: DotaMatchElement(id: 12345, playerSlot: 3, radiantWin: true, duration: 3005, gameMode: 22, lobbyType: 0, heroID: 16, startTime: 1607233132, version: nil, kills: 4, deaths: 7, assists: 29, skill: nil, partySize: 2, heroes: nil, inDB: true) )
             .environmentObject(MatchModel())
     }
 }

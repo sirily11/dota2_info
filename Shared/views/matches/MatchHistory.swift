@@ -16,27 +16,6 @@ struct MatchHistory: View {
     var body: some View {
 
             VStack {
-                // Search view
-                HStack {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-
-                        TextField("search by Match ID", text: $searchText, onEditingChanged: { isEditing in
-                            self.showCancelButton = true
-                        }, onCommit: {
-                            matchModel.findMatchById(searchText, playerID: playerId)
-                        }).foregroundColor(.primary)
-
-                      
-                    }
-                    .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                    .foregroundColor(.secondary)
-                    
-                    .cornerRadius(10.0)
-
-                }
-                .padding(.horizontal)
-                
                 List {
                     if matchModel.isLoadingMatches{
                         HStack(alignment: .center){
@@ -49,7 +28,7 @@ struct MatchHistory: View {
                         match in
                         if let id = match.id{
                             NavigationLink(
-                                destination: MatchDetailPage(matchId: String(id), playerId: playerId),
+                                destination: MatchDetailPage(matchId: id, playerId: playerId),
                                 label: {
                                     MatchHistoryRow(match: match)
                                 })

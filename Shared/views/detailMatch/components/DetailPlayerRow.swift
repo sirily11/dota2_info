@@ -156,6 +156,8 @@ struct DetailPlayerRow: View {
                 .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: showDetails ? 0.4 : 0), lineWidth: 1)
           )
         
+        
+        
     }
     
     

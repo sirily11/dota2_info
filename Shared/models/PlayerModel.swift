@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class NetworkPlayerModel{
+class NetworkPlayerModel: ObservableObject{
     let playerURL = "https://api.opendota.com/api/players/"
 
     
@@ -29,7 +29,40 @@ class NetworkPlayerModel{
         }.resume()
     }
     
-    func addPlayer(viewContext: NSManagedObjectContext, dotaPlayer: DotaPlayer){
+    func addPlayer(viewContext: NSManagedObjectContext, dotaPlayer: DotaPlayer?, completion: () -> Void){
+        let newPlayer = Player(context: viewContext)
+        if let accountID = dotaPlayer?.profile?.accountID{
+            newPlayer.userid = Int64(accountID)
+        }
         
+        if let username = dotaPlayer?.profile?.personaname{
+            newPlayer.username = username
+        }
+        
+        if let avatar = dotaPlayer?.profile?.avatarfull{
+            newPlayer.avatar = avatar
+        }
+        
+        do{
+            try viewContext.save()
+            completion()
+        } catch{
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func deletePlayers(viewContext:NSManagedObjectContext, offsets: IndexSet, players: FetchedResults<Player>) {
+        withAnimation {
+            offsets.map { players[$0] }.forEach(viewContext.delete)
+
+            do {
+                try viewContext.save()
+            } catch {
+            
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
     }
 }

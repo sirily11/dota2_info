@@ -7,46 +7,48 @@
 
 import Foundation
 import RealmSwift
-//let matchID, barracksStatusDire, barracksStatusRadiant, cluster: Int?
-//let direScore, duration, engine, firstBloodTime: Int?
-//let gameMode, humanPlayers, leagueid, lobbyType: Int?
-//let matchSeqNum, negativeVotes, positiveVotes, radiantScore: Int?
-//let radiantWin: Bool?
-//let skill, startTime, towerStatusDire, towerStatusRadiant: Int?
-//let replaySalt, seriesID, seriesType: Int?
-//let players: [PlayerMatch]?
-//let patch, region: Int?
-//let replayURL: String?
-class MatchDetailsDB : Object, ObjectKeyIdentifiable{
+
+class MatchDetailsDB: Object {
     @objc dynamic var _id = ObjectId.generate()
-    @objc dynamic var matchID = 0, barracksStatusDire = 0, barracksStatusRadiant = 0, cluster = 0
-    @objc dynamic var direScore = 0, duration = 0, engine = 0, firstBloodTime = 0
-    @objc dynamic var  gameMode = 0, humanPlayers = 0, leagueid = 0, lobbyType = 0
-//    @objc dynamic var
-    
+    /// Who store this match
+    @objc dynamic var playerId: String = ""
+
+    let matchID = RealmOptional<Int>()
+    let barracksStatusDire = RealmOptional<Int>()
+    let barracksStatusRadiant = RealmOptional<Int>()
+    let cluster = RealmOptional<Int>()
+    let direScore = RealmOptional<Int>(), duration = RealmOptional<Int>(), engine = RealmOptional<Int>(), firstBloodTime = RealmOptional<Int>()
+    let gameMode = RealmOptional<Int>(), humanPlayers = RealmOptional<Int>(), leagueid = RealmOptional<Int>(), lobbyType = RealmOptional<Int>()
+    let matchSeqNum = RealmOptional<Int>(), negativeVotes = RealmOptional<Int>(), positiveVotes = RealmOptional<Int>(), radiantScore = RealmOptional<Int>()
+    let radiantWin = RealmOptional<Bool>()
+    let skill = RealmOptional<Int>(), startTime = RealmOptional<Int>(), towerStatusDire = RealmOptional<Int>(), towerStatusRadiant = RealmOptional<Int>()
+    let patch = RealmOptional<Int>(), region = RealmOptional<Int>()
+    let replayURL: String? = "", replaySalt = RealmOptional<Int>(), seriesID = RealmOptional<Int>(), seriesType = RealmOptional<Int>()
+    let players = List<MatchPlayerDB>()
 }
 
-//var id = UUID()
-//
-//let matchID, playerSlot: Int?
-//let abilityUpgradesArr: [Int]?
-//let accountID, assists: Int?
-//let permanentBuffs: [PermanentBuff]?
-//let backpack0, backpack1, backpack2, backpack3: Int?
-//let deaths, denies: Int?
-//let gold, goldPerMin: Double?
-//let goldSpent, heroDamage, heroHealing: Double?
-//let heroID: Int?
-//let item0, item1, item2, item3: Int?
-//let item4, item5, itemNeutral, kills: Int?
-//let lastHits, leaverStatus, level, netWorth: Double?
-//let partyID, partySize, towerDamage, xpPerMin: Double?
-//let personaname: String?
-//let radiantWin: Bool?
-//let startTime, duration, cluster, lobbyType: Double?
-//let gameMode: Int?
-//let isContributor: Bool?
-//let patch, region: Int?
-//let isRadiant: Bool?
-//let win, lose, totalGold, totalXP: Int?
-//let kda, abandons, rankTier: Double?
+class MatchPlayerDB: Object {
+    let matchID = RealmOptional<Int>(), playerSlot = RealmOptional<Int>()
+    let abilityUpgradesArr = List<Int>()
+    let accountID = RealmOptional<Int>(), assists = RealmOptional<Int>()
+    let backpack0 = RealmOptional<Int>(), backpack1 = RealmOptional<Int>(), backpack2 = RealmOptional<Int>(), backpack3 = RealmOptional<Int>()
+    let deaths = RealmOptional<Int>(), denies = RealmOptional<Int>()
+    let gold = RealmOptional<Double>()
+    let goldPerMin = RealmOptional<Double>()
+    let goldSpent = RealmOptional<Double>()
+    let heroDamage = RealmOptional<Double>()
+    let heroHealing = RealmOptional<Double>()
+    let heroID = RealmOptional<Int>(), item0  = RealmOptional<Int>(), item1 = RealmOptional<Int>(), item2 = RealmOptional<Int>(), item3 = RealmOptional<Int>(), item4 = RealmOptional<Int>(), item5 = RealmOptional<Int>(), itemNeutral = RealmOptional<Int>(), kills = RealmOptional<Int>()
+    let lastHits = RealmOptional<Double>(), leaverStatus = RealmOptional<Double>(), level = RealmOptional<Double>(), netWorth = RealmOptional<Double>()
+    let partyID = RealmOptional<Double>(), partySize = RealmOptional<Double>(), towerDamage = RealmOptional<Double>(), xpPerMin = RealmOptional<Double>()
+    @objc dynamic var personaname: String? = ""
+    let radiantWin = RealmOptional<Bool>(), isRadiant = RealmOptional<Bool>(), isContributor = RealmOptional<Bool>()
+    let startTime = RealmOptional<Double>(), duration = RealmOptional<Double>(), cluster = RealmOptional<Double>(), lobbyType = RealmOptional<Double>()
+    let gameMode = RealmOptional<Int>(), patch = RealmOptional<Int>(), region = RealmOptional<Int>(), win = RealmOptional<Int>(), lose = RealmOptional<Int>(), totalGold = RealmOptional<Int>(), totalXP = RealmOptional<Int>()
+    let kda = RealmOptional<Double>(), abandons = RealmOptional<Double>(), rankTier = RealmOptional<Double>()
+    let permanentBuff = List<PermanentBuffDB>()
+}
+
+class PermanentBuffDB: Object {
+    let permanentBuff = RealmOptional<Int>(), stackCount = RealmOptional<Int>()
+}

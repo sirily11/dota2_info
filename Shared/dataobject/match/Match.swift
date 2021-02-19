@@ -13,6 +13,7 @@ struct DotaMatchElement: Codable, Identifiable {
     let startTime, version, kills, deaths: Int?
     let assists, skill, partySize: Int?
     let heroes: Heroes?
+    var inDB = false
 
     enum CodingKeys: String, CodingKey {
         case id = "match_id"

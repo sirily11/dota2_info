@@ -17,6 +17,7 @@ struct MatchDetails: Codable {
     let players: [PlayerMatch]?
     let patch, region: Int?
     let replayURL: String?
+    var inDB = false
 
     enum CodingKeys: String, CodingKey {
         case matchID = "match_id"
@@ -186,6 +187,6 @@ extension MatchDetails{
         
 
         
-        return DotaMatchElement(id: matchID, playerSlot: foundPlayer, radiantWin: radiantWin, duration: duration, gameMode: gameMode, lobbyType: lobbyType, heroID: foundHero, startTime: startTime, version: nil, kills: Int(foundKills), deaths:  Int(foundDeaths), assists:  Int(foundAssists), skill: skill, partySize:  Int(foundPartySize), heroes: nil)
+        return DotaMatchElement(id: matchID, playerSlot: foundPlayer, radiantWin: radiantWin, duration: duration, gameMode: gameMode, lobbyType: lobbyType, heroID: foundHero, startTime: startTime, version: nil, kills: Int(foundKills), deaths:  Int(foundDeaths), assists:  Int(foundAssists), skill: skill, partySize:  Int(foundPartySize), heroes: nil, inDB: inDB)
     }
 }

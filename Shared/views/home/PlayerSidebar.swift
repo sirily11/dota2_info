@@ -12,7 +12,7 @@ import SwiftUI
 struct PlayerSidebar: View {
     
 
-    
+    @EnvironmentObject var playerModel : NetworkPlayerModel
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -29,31 +29,18 @@ struct PlayerSidebar: View {
                
             }
             .onDelete{ indexSet in
-                deletePlayers(offsets: indexSet)
+                playerModel.deletePlayers(viewContext: viewContext, offsets: indexSet, players: players)
             }
         }
         
        
     }
     
-
-    private func deletePlayers(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { players[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-            
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
 }
 
 struct PlayerSidebar_Previews: PreviewProvider {
     static var previews: some View {
         PlayerSidebar().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(NetworkPlayerModel())
     }
 }

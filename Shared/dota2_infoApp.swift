@@ -11,6 +11,8 @@ import SwiftUI
 struct dota2_infoApp: App {
     @StateObject var matchModel = MatchModel()
     @StateObject var heroModel = HeroModel()
+    @StateObject var playerModel = NetworkPlayerModel()
+    
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
@@ -19,6 +21,7 @@ struct dota2_infoApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(matchModel)
                 .environmentObject(heroModel)
+                .environmentObject(NetworkPlayerModel())
         }
     }
 }

@@ -8,10 +8,27 @@
 import SwiftUI
 import CoreData
 
+enum ActiveSheet: Identifiable {
+    case first, second
+    
+    var id: Int {
+        hashValue
+    }
+}
+
 
 struct ContentView: View {
-    @State var showAddPlayerDialog: Bool = false
+    @State var showSheet : ActiveSheet? {
+        didSet{
+            if showSheet == nil{
+                searchedMatch = nil
+            }
+        }
+    }
     @EnvironmentObject var matchModel: MatchModel
+    @State var text = ""
+    @State var searchedMatch: MatchDetails?
+    @State var isLoading = false
 
     var body: some View {
         NavigationView{
@@ -19,10 +36,61 @@ struct ContentView: View {
             Text("No Player selected")
             Text("No match selected")
         }
-        .sheet(isPresented: $showAddPlayerDialog) {
-            NewPlayerDialog(show: $showAddPlayerDialog)
+        .sheet(item: $showSheet){
+            sheet in
+                switch sheet{
+                case .first:
+                     NewPlayerDialog(show: $showSheet)
+                case .second:
+                    Group{
+                            VStack{
+                                if let match = searchedMatch{
+                                    MatchDetailView(match: match)
+                                } else{
+                                    Text("Match Not Found")
+                                }
+                                Button(action: { showSheet = nil }){
+                                    Text("Close")
+                                }
+                            }
+                    }
+                    .frame(width: 600, height: 600, alignment:  .center)
+                    .padding()
+                }
         }
         .toolbar {
+            // Search view
+            HStack {
+                TextField("Search ...", text: $text, onCommit:  {
+                    if !text.isEmpty{
+                        if searchedMatch == nil{
+                            withAnimation{
+                                isLoading = true
+                            }
+                            matchModel.searchMatchById(text) { (match) in
+                                searchedMatch = match
+                                showSheet = .second
+                                withAnimation{
+                                    isLoading = false
+                                }
+                            }
+                        }
+                    }
+                })
+                         .padding(7)
+                         .padding(.horizontal, 25)
+                         .cornerRadius(8)
+                         .padding(.horizontal, 10)
+                        .frame(width: 280)
+                
+                    if isLoading{
+                        ProgressView()
+                            .frame(width: 20, height: 20, alignment:  .center)
+                    }
+                    
+                 }
+             
+        
             if let player = matchModel.selectedPlayer{
                 Button(action: { matchModel.findMatchByPlayer(playerId: player) }, label: {
                                           Image(systemName: "arrow.clockwise")
@@ -39,7 +107,7 @@ struct ContentView: View {
             EditButton()
             #endif
 
-            Button(action: { showAddPlayerDialog = true } ) {
+            Button(action: { showSheet = .first } ) {
                 Label("Add Player", systemImage: "plus")
             }
         }

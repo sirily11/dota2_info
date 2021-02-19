@@ -14,7 +14,7 @@ struct SkillsUpgrade: View {
     @EnvironmentObject var heroModel : HeroModel
     let player: PlayerMatch
 
-    let rows = [GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)),GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)), GridItem(.adaptive(minimum: minimumWidth)),]
+    let rows = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()),GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         LazyVGrid(columns: rows){

@@ -30,6 +30,7 @@ struct MatchDetailView: View {
                           )
                           .padding([.top, .horizontal])
                 
+                
                 Section(header: Text("天辉").padding(.horizontal, 15.0).padding(.vertical, 5).background(Color.green) ){
                     if let players = match.players{
                         ForEach(players.filter{ player in player.isRadiant! } ){
