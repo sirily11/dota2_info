@@ -9,12 +9,16 @@ import SwiftUI
 
 @main
 struct dota2_infoApp: App {
+    @StateObject var matchModel = MatchModel()
+    @StateObject var heroModel = HeroModel()
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(matchModel)
+                .environmentObject(heroModel)
         }
     }
 }
