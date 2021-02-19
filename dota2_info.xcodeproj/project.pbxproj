@@ -74,6 +74,7 @@
 		257993C825DF996000DF6453 /* MatchDetailsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257993C625DF996000DF6453 /* MatchDetailsDB.swift */; };
 		257993CE25DF9D9200DF6453 /* extensions+MatchDetailDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257993CD25DF9D9200DF6453 /* extensions+MatchDetailDB.swift */; };
 		257993CF25DF9D9200DF6453 /* extensions+MatchDetailDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257993CD25DF9D9200DF6453 /* extensions+MatchDetailDB.swift */; };
+		257993D925DFE8AE00DF6453 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257993D825DFE8AD00DF6453 /* UserNotifications.framework */; };
 		257F803E25DD8C050087D339 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 257F803D25DD8C050087D339 /* Kingfisher */; };
 		257F804525DD8F070087D339 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 257F804425DD8F070087D339 /* Kingfisher */; };
 		257F805325DDA3C40087D339 /* PlayerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F805225DDA3C40087D339 /* PlayerRow.swift */; };
@@ -162,6 +163,7 @@
 		257993BB25DF98F400DF6453 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		257993C625DF996000DF6453 /* MatchDetailsDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDetailsDB.swift; sourceTree = "<group>"; };
 		257993CD25DF9D9200DF6453 /* extensions+MatchDetailDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extensions+MatchDetailDB.swift"; sourceTree = "<group>"; };
+		257993D825DFE8AD00DF6453 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		257F805225DDA3C40087D339 /* PlayerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRow.swift; sourceTree = "<group>"; };
 		257F805A25DDABE70087D339 /* MatchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHistory.swift; sourceTree = "<group>"; };
 		257F806525DE24690087D339 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257993D925DFE8AE00DF6453 /* UserNotifications.framework in Frameworks */,
 				2579938C25DF824E00DF6453 /* RealmSwift in Frameworks */,
 				25040AAB25DE3CED0015AA0C /* SwiftDate in Frameworks */,
 				257F804525DD8F070087D339 /* Kingfisher in Frameworks */,
@@ -306,6 +309,7 @@
 		257F804325DD8F070087D339 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				257993D825DFE8AD00DF6453 /* UserNotifications.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

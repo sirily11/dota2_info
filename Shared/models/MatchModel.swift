@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import RealmSwift
+import UserNotifications
 
 extension Results {
     func toArray() -> [Element] {
@@ -165,14 +166,22 @@ class MatchModel : ObservableObject{
     /**
      Get list of match summary user played recently
      */
-    func findMatchByPlayer(playerId: String){
+    func findMatchByPlayer(playerId: String, pushNotification: Bool = false){
+        let prevMatches = matches
+        
         guard let url = URL(string: "\(matchAbstractURL)\(playerId)/recentMatches" ) else {
             return
         }
-        loadMatchesFromDB(playerId: playerId)
-      
+        
+        if !pushNotification{
+            loadMatchesFromDB(playerId: playerId)
+        }
+
         withAnimation{
-            isLoadingMatches = true
+            if !pushNotification{
+                isLoadingMatches = true
+            }
+            
             selectedPlayer = playerId
         }
  
@@ -203,19 +212,63 @@ class MatchModel : ObservableObject{
                         m in
                         self.matches.append(m)
                     }
+                    
+                    self.matches = self.matches.sorted(by: { (prev, curr) -> Bool in
+                        prev.startTime ?? 0 > curr.startTime ?? 0
+                    })
+                    
+                    // Find new match added
+                    if pushNotification{
+                        let newAdded = self.matches.filter{
+                            match in
+                            let contained = prevMatches.contains{
+                                m in
+                                m.id == match.id
+                            }
+                            return !contained
+                        }
+                        
+                        self.pushNotification(matches: newAdded)
+                    }
+                    
                 withAnimation{
-                   
-                    self.isLoadingMatches = false
+                    if !pushNotification{
+                        self.isLoadingMatches = false
+                    }
                 }
                 } catch{
                     withAnimation{
                
-                        self.isLoadingMatches = false
+                        if !pushNotification{
+                            self.isLoadingMatches = false
+                        }
                     }
                 }
             
             }
         }.resume()
+    }
+    
+    func pushNotification(matches: [DotaMatchElement]){
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])  {
+                      success, error in
+                          if let error = error{
+                            print("Failed to push: m\(error)")
+                          }
+            
+                  }
+        let match = matches.first
+        if let match = match{
+            let content = UNMutableNotificationContent()
+            content.title = "New Match Found"
+            content.subtitle = "Match ID: \(String(match.id ?? 0))"
+            content.body = "\(match.kills ?? 0)/\(match.deaths ?? 0)/\(match.assists ?? 0)."
+            content.sound = .default
+            
+            let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: nil)
+            UNUserNotificationCenter.current().add(request)
+            
+        }
     }
 }
 
