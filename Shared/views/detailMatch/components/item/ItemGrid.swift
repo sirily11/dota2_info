@@ -51,6 +51,7 @@ struct ItemCeil: View {
                         }
                         .popover(isPresented: $showInfo, content: {
                             ItemInfo(item: item)
+                                .frame(width: 400)
                         })
                 }
             } else{
@@ -90,11 +91,37 @@ struct ItemInfo: View {
                             Text("\(item.cd ?? 0)")
                         }
                         Divider()
-                        HStack{
-                            Text("Notes")
-                            Spacer()
-                            Text("\(item.notes ?? "")")
-                                .frame(width: 200)
+                        
+                        if let notes = item.notes{
+                            if !notes.isEmpty{
+                                HStack{
+                                    Text("\(notes)")
+                                    Spacer()
+                                }
+                            }
+                        }
+                        
+                        if let hint = item.hint{
+                            ForEach(hint, id: \.self){
+                                h in
+                                HStack{
+                                    Text(h)
+                                    Spacer()
+                                }
+                            }
+                            .padding()
+                            .background(Color.blue)
+                        }
+                        
+                      
+                        if let lore = item.lore{
+                            HStack {
+                                Text("\(lore)")
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color.black)
+                            
                         }
                     }
                         
@@ -112,9 +139,9 @@ struct ItemGrid_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ItemGrid(
-                items: [Item(hint: nil, id: nil, img: "/apps/dota2/images/items/stormcrafter_lg.png", dname: "Item", qual: nil, cost: nil, notes: nil, cd: nil, lore: nil, charges: nil), nil, nil, nil, nil, nil ])
+                items: [Item(hint: nil, id: nil, img: "/apps/dota2/images/items/stormcrafter_lg.png", dname: "Item", qual: nil, cost: nil, notes: "", cd: nil, lore: "", charges: nil), nil, nil, nil, nil, nil ])
             ItemInfo(
-                item: Item(hint: nil, id: nil, img: "/apps/dota2/images/items/stormcrafter_lg.png", dname: "Item", qual: nil, cost: 1200, notes: nil, cd: 10, lore: nil, charges: nil) )
+                item: Item(hint:["Hello", "world"], id: nil, img: "/apps/dota2/images/items/stormcrafter_lg.png", dname: "Item", qual: nil, cost: 1200, notes: nil, cd: 10, lore: "Hello world", charges: nil) )
         }
     }
 }

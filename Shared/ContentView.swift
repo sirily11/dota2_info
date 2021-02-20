@@ -61,7 +61,7 @@ struct ContentView: View {
         .toolbar {
             // Search view
             HStack {
-                TextField("Search ...", text: $text, onCommit:  {
+                TextField("Match ID", text: $text, onCommit:  {
                     if !text.isEmpty{
                         if searchedMatch == nil{
                             withAnimation{

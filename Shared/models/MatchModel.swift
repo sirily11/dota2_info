@@ -31,31 +31,39 @@ class MatchModel : ObservableObject{
     
     @Published var isLoadingMatches = false
     @Published var matches: [DotaMatchElement] = []
+    private var prevMatches: [DotaMatchElement] = []
     
     var realm: Realm?
 //    var token: NotificationToken?
     
     init() {
-    
-            self.realm = try! Realm()
-           
-       
+        let config = Realm.Configuration(schemaVersion: 2)
+        Realm.Configuration.defaultConfiguration = config
+        self.realm = try! Realm()
     }
     
     /**
-     Add Match to DB
+     Add Match to DB. If exists, then update it
      */
     func storeMatchIntoDB(match: MatchDetails){
         do{
             try realm?.write{
+                let storedMatch = realm?.objects(MatchDetailsDB.self).filter("matchID = \(String(match.matchID ?? 0))").first
                 if let playerId = selectedPlayer{
-                    let matchDB = match.toDB(playerId: playerId)
-                    realm?.add(matchDB)
-
-                    let index = matches.firstIndex{ m in m.id == match.matchID }
-                    matches[index!] = match.toAbstractMatch(playerID: playerId)
+                if let storedMatch = storedMatch{
+                    storedMatch.replayURL = match.replayURL
+                    
+                } else{
+             
+                        let matchDB = match.toDB(playerId: playerId)
+                        realm?.add(matchDB)
+                        
+                        let index = matches.firstIndex{ m in m.id == match.matchID }
+                        var newMatch = match.toAbstractMatch(playerID: playerId)
+                        newMatch.inDB = true
+                        matches[index!] = newMatch
+                    }
                 }
-               
             }
         } catch{
             print("Cannot add match to DB")
@@ -66,7 +74,7 @@ class MatchModel : ObservableObject{
      Load matches from database
      */
     func loadMatchesFromDB(playerId: String){
-        let results = realm?.objects(MatchDetailsDB.self).filter("playerId = '\(playerId)'").sorted(byKeyPath: "startTime")
+        let results = realm?.objects(MatchDetailsDB.self).filter("playerId = '\(playerId)'").sorted(byKeyPath: "startTime", ascending: false)
         if let results = results{
             let histories: [DotaMatchElement] = results.map{ r in MatchDetails(from: r).toAbstractMatch(playerID: playerId) }
             matches = histories
@@ -126,11 +134,13 @@ class MatchModel : ObservableObject{
     /**
      Get match data. If match exist in DB, then return the data from DB, otherwise, use network result
      */
-    func findMatchDetailsById(_ matchId: Int, playerID: String?, completion: @escaping (MatchDetails) -> Void ){
+    func findMatchDetailsById(_ matchId: Int, playerID: String?, forceFetch: Bool = false ,completion: @escaping (MatchDetails) -> Void ){
         let history = loadMatchFromDB(matchId: matchId)
         if let history = history{
-            completion(history)
-            return
+            if !forceFetch{
+                completion(history)
+                return
+            }
         }
         
         
@@ -164,33 +174,19 @@ class MatchModel : ObservableObject{
     }
     
     /**
-     Get list of match summary user played recently
+     Helper function to find recent matches
      */
-    func findMatchByPlayer(playerId: String, pushNotification: Bool = false){
-        let prevMatches = matches
-        
+    private func findMatchByPlayerUtil(playerId: String, completion: @escaping ([DotaMatchElement]) -> Void, onError: @escaping (String) -> Void ){
         guard let url = URL(string: "\(matchAbstractURL)\(playerId)/recentMatches" ) else {
+            onError("cannot construct url")
             return
         }
         
-        if !pushNotification{
-            loadMatchesFromDB(playerId: playerId)
-        }
-
-        withAnimation{
-            if !pushNotification{
-                isLoadingMatches = true
-            }
-            
-            selectedPlayer = playerId
-        }
- 
-        
         URLSession.shared.dataTask(with: url){
-            (data, resp, err) in
+           [weak self] (data, resp, err) in
             
             guard let data = data else {
-                self.isLoadingMatches = false
+                self?.isLoadingMatches = false
                 return
                 
             }
@@ -198,77 +194,106 @@ class MatchModel : ObservableObject{
             DispatchQueue.main.async {
                 do{
                 let matches = try JSONDecoder().decode([DotaMatchElement].self, from: data)
-                    let tmp = matches.filter{
-                        match in
-                        let contained = self.matches.contains{
-                            m in
-                            m.id == match.id
-                        }
-                        
-                        return !contained
-                    }
+                completion(matches)
                     
-                    tmp.forEach{
-                        m in
-                        self.matches.append(m)
-                    }
                     
-                    self.matches = self.matches.sorted(by: { (prev, curr) -> Bool in
-                        prev.startTime ?? 0 > curr.startTime ?? 0
-                    })
-                    
-                    // Find new match added
-                    if pushNotification{
-                        let newAdded = self.matches.filter{
-                            match in
-                            let contained = prevMatches.contains{
-                                m in
-                                m.id == match.id
-                            }
-                            return !contained
-                        }
-                        
-                        self.pushNotification(matches: newAdded)
-                    }
-                    
-                withAnimation{
-                    if !pushNotification{
-                        self.isLoadingMatches = false
-                    }
-                }
                 } catch{
-                    withAnimation{
-               
-                        if !pushNotification{
-                            self.isLoadingMatches = false
-                        }
-                    }
+                 onError("Cannot fetch matches")
                 }
             
             }
         }.resume()
     }
+        
     
-    func pushNotification(matches: [DotaMatchElement]){
+    /**
+     Get list of match summary user played recently
+     */
+    func findMatchByPlayer(playerId: String){
+        withAnimation{
+            isLoadingMatches = true
+            selectedPlayer = playerId
+        }
+        loadMatchesFromDB(playerId: playerId)
+        findMatchByPlayerUtil(playerId: playerId, completion: {
+           [weak self] matches in
+            let tmp = matches.filter{
+                match in
+                let contained = self?.matches.contains{
+                    m in
+                    m.id == match.id
+                }
+                
+                return !(contained ?? false)
+            }
+            
+            tmp.forEach{
+                m in
+                self?.matches.append(m)
+            }
+
+            if tmp.count > 0{
+                self?.matches = self?.matches.sorted(by: { (prev, curr) -> Bool in
+                    prev.startTime ?? 0 > curr.startTime ?? 0
+                }) ?? []
+            }
+            
+            withAnimation{
+                self?.isLoadingMatches = false
+            }
+            
+        }) { [weak self] (error) in
+            print(error)
+            withAnimation{
+                self?.isLoadingMatches = false
+            }
+        }
+    }
+    
+    /**
+     Find newly added match and push notification
+     */
+    func fetchAndPushNotification(playerId: String){
+        findMatchByPlayerUtil(playerId: playerId, completion: {
+            [weak self] matches in
+            
+            let latestMatch = matches.first
+            if let matches = self?.matches{
+                let exists = matches.contains { (match) -> Bool in
+                    return match.id == latestMatch?.id
+                }
+                if !exists{
+                    if let latestMatch = latestMatch{
+                        self?.pushNotification(match: latestMatch)
+                    }
+                }
+            }
+            
+        }) { (error) in
+            print(error)
+            
+        }
+    }
+    
+    func pushNotification(match: DotaMatchElement){
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])  {
                       success, error in
                           if let error = error{
                             print("Failed to push: m\(error)")
+                          } else{
+                                let content = UNMutableNotificationContent()
+                                content.title = "New Match Found"
+                                content.subtitle = "Match ID: \(String(match.id ?? 0))"
+                                content.body = "\(match.win() ? "Win" : "Lost"): \(match.kills ?? 0)/\(match.deaths ?? 0)/\(match.assists ?? 0)."
+                                content.sound = .default
+                                
+                                let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: nil)
+                                UNUserNotificationCenter.current().add(request)
+                            
                           }
             
                   }
-        let match = matches.first
-        if let match = match{
-            let content = UNMutableNotificationContent()
-            content.title = "New Match Found"
-            content.subtitle = "Match ID: \(String(match.id ?? 0))"
-            content.body = "\(match.kills ?? 0)/\(match.deaths ?? 0)/\(match.assists ?? 0)."
-            content.sound = .default
-            
-            let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: nil)
-            UNUserNotificationCenter.current().add(request)
-            
-        }
+       
     }
 }
 

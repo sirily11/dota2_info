@@ -21,18 +21,9 @@ struct DetailPlayerRow: View {
             if let hero = hero{
                  VStack{
                     HStack(alignment: .top){
-                        ZStack(alignment: .bottomTrailing){
-                            KFImage(URL(string: hero.heroData.img!.getAssetURL()))
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 100, height: 60)
-                            Text(String(Int(player.level  ?? 0)))
-                                .padding(4)
-                                .background(Color.blue)
-                                .offset(x: 0, y: 0)
-                                
+                        if let hero = hero{
+                            HeroAvatar(player: player, hero: hero)
                         }
-
                         
                         VStack(alignment: .leading){
                             Text(player.personaname ?? "匿名玩家")

@@ -75,6 +75,8 @@
 		257993CE25DF9D9200DF6453 /* extensions+MatchDetailDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257993CD25DF9D9200DF6453 /* extensions+MatchDetailDB.swift */; };
 		257993CF25DF9D9200DF6453 /* extensions+MatchDetailDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257993CD25DF9D9200DF6453 /* extensions+MatchDetailDB.swift */; };
 		257993D925DFE8AE00DF6453 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257993D825DFE8AD00DF6453 /* UserNotifications.framework */; };
+		257993DF25E0F8B000DF6453 /* HeroAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257993DE25E0F8B000DF6453 /* HeroAvatar.swift */; };
+		257993E025E0F8B000DF6453 /* HeroAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257993DE25E0F8B000DF6453 /* HeroAvatar.swift */; };
 		257F803E25DD8C050087D339 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 257F803D25DD8C050087D339 /* Kingfisher */; };
 		257F804525DD8F070087D339 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 257F804425DD8F070087D339 /* Kingfisher */; };
 		257F805325DDA3C40087D339 /* PlayerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F805225DDA3C40087D339 /* PlayerRow.swift */; };
@@ -164,6 +166,7 @@
 		257993C625DF996000DF6453 /* MatchDetailsDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDetailsDB.swift; sourceTree = "<group>"; };
 		257993CD25DF9D9200DF6453 /* extensions+MatchDetailDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extensions+MatchDetailDB.swift"; sourceTree = "<group>"; };
 		257993D825DFE8AD00DF6453 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		257993DE25E0F8B000DF6453 /* HeroAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroAvatar.swift; sourceTree = "<group>"; };
 		257F805225DDA3C40087D339 /* PlayerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRow.swift; sourceTree = "<group>"; };
 		257F805A25DDABE70087D339 /* MatchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHistory.swift; sourceTree = "<group>"; };
 		257F806525DE24690087D339 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
@@ -247,12 +250,12 @@
 		25040ACD25DE56B00015AA0C /* components */ = {
 			isa = PBXGroup;
 			children = (
-				25040AC625DE51A60015AA0C /* avatarView.swift */,
+				257993E825E0FB6B00DF6453 /* skill */,
+				257993E725E0FB5D00DF6453 /* item */,
+				257993E625E0FB4B00DF6453 /* extension */,
+				257993E525E0FB3800DF6453 /* avatar */,
 				25040ACE25DE56BD0015AA0C /* InfoCard.swift */,
 				25040B0B25DE6FA10015AA0C /* DetailPlayerRow.swift */,
-				25040B6525DEA64B0015AA0C /* String+extensions.swift */,
-				255BC8F125DEB9F100946641 /* ItemGrid.swift */,
-				255BC8F825DEE66600946641 /* SkillsUpgrade.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -304,6 +307,39 @@
 				25040B5725DE975C0015AA0C /* ItemIds.swift */,
 			);
 			path = item;
+			sourceTree = "<group>";
+		};
+		257993E525E0FB3800DF6453 /* avatar */ = {
+			isa = PBXGroup;
+			children = (
+				257993DE25E0F8B000DF6453 /* HeroAvatar.swift */,
+				25040AC625DE51A60015AA0C /* avatarView.swift */,
+			);
+			path = avatar;
+			sourceTree = "<group>";
+		};
+		257993E625E0FB4B00DF6453 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				25040B6525DEA64B0015AA0C /* String+extensions.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		257993E725E0FB5D00DF6453 /* item */ = {
+			isa = PBXGroup;
+			children = (
+				255BC8F125DEB9F100946641 /* ItemGrid.swift */,
+			);
+			path = item;
+			sourceTree = "<group>";
+		};
+		257993E825E0FB6B00DF6453 /* skill */ = {
+			isa = PBXGroup;
+			children = (
+				255BC8F825DEE66600946641 /* SkillsUpgrade.swift */,
+			);
+			path = skill;
 			sourceTree = "<group>";
 		};
 		257F804325DD8F070087D339 /* Frameworks */ = {
@@ -667,6 +703,7 @@
 				257F807B25DE2B1A0087D339 /* Hero.swift in Sources */,
 				25040B1A25DE8A9B0015AA0C /* MatchHero.swift in Sources */,
 				25040AE425DE5A310015AA0C /* Region.swift in Sources */,
+				257993DF25E0F8B000DF6453 /* HeroAvatar.swift in Sources */,
 				25040AC725DE51A60015AA0C /* avatarView.swift in Sources */,
 				25040B4125DE96040015AA0C /* AbilityIds.swift in Sources */,
 				257F805325DDA3C40087D339 /* PlayerRow.swift in Sources */,
@@ -709,6 +746,7 @@
 				255BC8FA25DEE66600946641 /* SkillsUpgrade.swift in Sources */,
 				257F807C25DE2B1A0087D339 /* Hero.swift in Sources */,
 				25040B1B25DE8A9B0015AA0C /* MatchHero.swift in Sources */,
+				257993E025E0F8B000DF6453 /* HeroAvatar.swift in Sources */,
 				25040AE525DE5A310015AA0C /* Region.swift in Sources */,
 				25040AC825DE51A60015AA0C /* avatarView.swift in Sources */,
 				25040B4225DE96040015AA0C /* AbilityIds.swift in Sources */,

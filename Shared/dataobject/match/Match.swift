@@ -51,3 +51,19 @@ struct PlayerSlot: Codable {
 }
 
 typealias DotaMatch = [DotaMatchElement]
+
+extension DotaMatchElement{
+    func win()-> Bool{
+        if let playerSlot = self.playerSlot{
+            if let radiant_win = self.radiantWin{
+                if playerSlot <= 127 && radiant_win{
+                    return true
+                } else if playerSlot > 127 && !radiant_win{
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+}

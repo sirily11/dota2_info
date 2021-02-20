@@ -23,7 +23,8 @@ class MatchDetailsDB: Object {
     let radiantWin = RealmOptional<Bool>()
     let skill = RealmOptional<Int>(), startTime = RealmOptional<Int>(), towerStatusDire = RealmOptional<Int>(), towerStatusRadiant = RealmOptional<Int>()
     let patch = RealmOptional<Int>(), region = RealmOptional<Int>()
-    let replayURL: String? = "", replaySalt = RealmOptional<Int>(), seriesID = RealmOptional<Int>(), seriesType = RealmOptional<Int>()
+    @objc dynamic var replayURL: String? = ""
+    let replaySalt = RealmOptional<Int>(), seriesID = RealmOptional<Int>(), seriesType = RealmOptional<Int>()
     let players = List<MatchPlayerDB>()
 }
 

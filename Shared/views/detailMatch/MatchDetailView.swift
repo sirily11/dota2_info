@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct MatchDetailView: View {
-    let match: MatchDetails
+    @EnvironmentObject var matchModel : MatchModel
+    @State var match: MatchDetails
+    @State var isLoading = false
 
     
     var body: some View {
@@ -16,9 +18,34 @@ struct MatchDetailView: View {
             HStack{
                 Text("比赛详情")
                     .font(.title)
+                Button(action: {
+                    isLoading = true
+                    matchModel.findMatchDetailsById(match.matchID ?? 0, playerID: matchModel.selectedPlayer, forceFetch: true)
+                    { (details) in
+                        match = details
+                        isLoading = false
+                    }
+                },
+                label: {
+                    Image(systemName: "arrow.clockwise")
+                })
+                if isLoading{
+                    ProgressView()
+                }
                 Spacer()
             }
             .padding()
+            
+            HStack{
+                if let link = match.replayURL{
+                    if let url = URL(string: link){
+                        Link("Replay click here", destination: url )
+                    } else{
+                        Text(link)
+                    }
+                   
+                }
+            }
             
             VStack(alignment: .leading){
                 InfoCard(match: match)
@@ -54,7 +81,7 @@ struct MatchDetailView: View {
                    
                 }
             }
-            .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .padding(.all)
         }
     }
 }

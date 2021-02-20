@@ -13,13 +13,14 @@ struct PlayerRow: View {
     @State var isLoading = false
     @State var dotaPlayer: DotaPlayer? = nil
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject var playerModel: NetworkPlayerModel
     let player: Player
     
     var body: some View {
         NavigationLink(
             destination: MatchHistory(playerId: "\(player.userid)")
             ) {
-            HStack{
+            HStack{ 
                 if player.avatar != nil{
                     KFImage(URL(string: player.avatar!)!)
                         .resizable()
@@ -28,12 +29,19 @@ struct PlayerRow: View {
                 }
             
                 Text("\(player.username ?? "abc")")
+                if isLoading{
+                    ProgressView()
+                    
+                }
             }
                 
         }
         .contextMenu(ContextMenu(menuItems: {
             Button("Show Info"){
                fetchDotaPlayer()
+            }
+            Button("Update Info"){
+               updateDotaPlayer()
             }
             Button("Delete"){
                 deletePlayer(player: player)
@@ -47,11 +55,32 @@ struct PlayerRow: View {
     })
     }
     
+    private func updateDotaPlayer(){
+        isLoading = true
+         playerModel.fetchPlayer(playerID: String(player.userid)){
+            newPlayer in
+            
+            isLoading = false
+            
+            if let accountId = newPlayer.profile?.accountID{
+                player.userid = Int64(accountId)
+            }
+            
+            if let avatar = newPlayer.profile?.avatar{
+                player.avatar = avatar
+            }
+            
+            if let name = newPlayer.profile?.personaname{
+                player.username = name
+            }
+            try! viewContext.save()
+        }
+    }
+    
     private func fetchDotaPlayer(){
         isLoading = true
         showInfo = true
-        let model = NetworkPlayerModel()
-        model.fetchPlayer(playerID: "\(player.userid)"){
+        playerModel.fetchPlayer(playerID: "\(player.userid)"){
             player in
             withAnimation{
                 isLoading = false

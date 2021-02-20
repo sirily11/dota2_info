@@ -36,7 +36,7 @@ struct MatchHistoryRow: View {
                     .font(.title3)
          
                 
-                if win(){
+                if match.win(){
                     Text("Win")
                         .padding(5)
                         .background(Color.green)
@@ -66,21 +66,9 @@ struct MatchHistoryRow: View {
                 Text("Assits: \(match.assists ?? 0)")
             }
         }
+        .frame(maxHeight: 140)
     }
     
-    private func win()-> Bool{
-        if let playerSlot = match.playerSlot{
-            if let radiant_win = match.radiantWin{
-                if playerSlot <= 127 && radiant_win{
-                    return true
-                } else if playerSlot > 127 && !radiant_win{
-                    return true
-                }
-            }
-        }
-        
-        return false
-    }
 }
 
 struct MatchHistoryRow_Previews: PreviewProvider {
