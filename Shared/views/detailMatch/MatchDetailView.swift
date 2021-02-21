@@ -36,17 +36,6 @@ struct MatchDetailView: View {
             }
             .padding()
             
-            HStack{
-                if let link = match.replayURL{
-                    if let url = URL(string: link){
-                        Link("Replay click here", destination: url )
-                    } else{
-                        Text(link)
-                    }
-                   
-                }
-            }
-            
             VStack(alignment: .leading){
                 InfoCard(match: match)
                     .padding()
@@ -57,6 +46,18 @@ struct MatchDetailView: View {
                           )
                           .padding([.top, .horizontal])
                 
+                HStack{
+                    Spacer()
+                    if let link = match.replayURL{
+                        if let url = URL(string: link){
+                            Link("Replay click here", destination: url )
+                        } else{
+                            Text(link)
+                        }
+                       
+                    }
+                    Spacer()
+                }
                 
                 Section(header: Text("天辉").padding(.horizontal, 15.0).padding(.vertical, 5).background(Color.green) ){
                     if let players = match.players{

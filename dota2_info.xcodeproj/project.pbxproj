@@ -61,6 +61,7 @@
 		25040B6025DE97FB0015AA0C /* HeroAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B5E25DE97FB0015AA0C /* HeroAbility.swift */; };
 		25040B6625DEA64B0015AA0C /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B6525DEA64B0015AA0C /* String+extensions.swift */; };
 		25040B6725DEA64B0015AA0C /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B6525DEA64B0015AA0C /* String+extensions.swift */; };
+		2555C05125E1426000994F5D /* SwiftDataTables in Frameworks */ = {isa = PBXBuildFile; productRef = 2555C05025E1426000994F5D /* SwiftDataTables */; };
 		255BC8F225DEB9F100946641 /* ItemGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F125DEB9F100946641 /* ItemGrid.swift */; };
 		255BC8F325DEB9F100946641 /* ItemGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F125DEB9F100946641 /* ItemGrid.swift */; };
 		255BC8F925DEE66600946641 /* SkillsUpgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F825DEE66600946641 /* SkillsUpgrade.swift */; };
@@ -113,6 +114,12 @@
 		25BE0F9F25DD8134005B5664 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE0F9E25DD8134005B5664 /* PlayerModel.swift */; };
 		25BE0FA825DD8156005B5664 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE0F9E25DD8134005B5664 /* PlayerModel.swift */; };
 		25BE0FAD25DD81F7005B5664 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE0F8E25DD7FFB005B5664 /* Player.swift */; };
+		25CAD8F825E28E680098A17B /* DataGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD8F725E28E680098A17B /* DataGrid.swift */; };
+		25CAD90225E290BD0098A17B /* DataGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD90125E290BD0098A17B /* DataGridView.swift */; };
+		25CAD90325E290BD0098A17B /* DataGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD90125E290BD0098A17B /* DataGridView.swift */; };
+		25CAD90825E290D40098A17B /* DataGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD8F725E28E680098A17B /* DataGrid.swift */; };
+		25CAD91225E29C9F0098A17B /* HistoryTablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */; };
+		25CAD91325E29C9F0098A17B /* HistoryTablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +202,9 @@
 		25BE0F8725DD7FE2005B5664 /* NewPlayerDialogDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlayerDialogDetails.swift; sourceTree = "<group>"; };
 		25BE0F8E25DD7FFB005B5664 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		25BE0F9E25DD8134005B5664 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		25CAD8F725E28E680098A17B /* DataGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGrid.swift; sourceTree = "<group>"; };
+		25CAD90125E290BD0098A17B /* DataGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGridView.swift; sourceTree = "<group>"; };
+		25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTablePage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2555C05125E1426000994F5D /* SwiftDataTables in Frameworks */,
 				2579938425DF821700DF6453 /* RealmSwift in Frameworks */,
 				25040AA525DE3C150015AA0C /* SwiftDate in Frameworks */,
 				2579938625DF821700DF6453 /* Realm in Frameworks */,
@@ -240,6 +251,7 @@
 		25040AB725DE4CA40015AA0C /* detailMatch */ = {
 			isa = PBXGroup;
 			children = (
+				25CAD8F025E28E2D0098A17B /* dataGrid */,
 				25040ACD25DE56B00015AA0C /* components */,
 				25040AB825DE4CB80015AA0C /* MatchDetailView.swift */,
 				25040ABF25DE4CCD0015AA0C /* MatchDetailPage.swift */,
@@ -496,6 +508,16 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		25CAD8F025E28E2D0098A17B /* dataGrid */ = {
+			isa = PBXGroup;
+			children = (
+				25CAD8F725E28E680098A17B /* DataGrid.swift */,
+				25CAD90125E290BD0098A17B /* DataGridView.swift */,
+				25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */,
+			);
+			path = dataGrid;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -517,6 +539,7 @@
 				25040AA425DE3C150015AA0C /* SwiftDate */,
 				2579938325DF821700DF6453 /* RealmSwift */,
 				2579938525DF821700DF6453 /* Realm */,
+				2555C05025E1426000994F5D /* SwiftDataTables */,
 			);
 			productName = "dota2_info (iOS)";
 			productReference = 25BE0F1925DD5D0D005B5664 /* dota2_info.app */;
@@ -618,6 +641,7 @@
 				257F803C25DD8C050087D339 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				25040AA325DE3C150015AA0C /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				2579938225DF821700DF6453 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				2555C04F25E1426000994F5D /* XCRemoteSwiftPackageReference "SwiftDataTables" */,
 			);
 			productRefGroup = 25BE0F1A25DD5D0D005B5664 /* Products */;
 			projectDirPath = "";
@@ -719,12 +743,15 @@
 				25040B1325DE89E60015AA0C /* HeroModel.swift in Sources */,
 				25BE0F8F25DD7FFB005B5664 /* Player.swift in Sources */,
 				25040AC025DE4CCD0015AA0C /* MatchDetailPage.swift in Sources */,
+				25CAD91225E29C9F0098A17B /* HistoryTablePage.swift in Sources */,
 				25040AEB25DE5A660015AA0C /* GameMode.swift in Sources */,
 				25040B5F25DE97FB0015AA0C /* HeroAbility.swift in Sources */,
 				25040AB925DE4CB80015AA0C /* MatchDetailView.swift in Sources */,
 				25040B6625DEA64B0015AA0C /* String+extensions.swift in Sources */,
+				25CAD90225E290BD0098A17B /* DataGridView.swift in Sources */,
 				25BE0F7D25DD7C15005B5664 /* NewPlayerDialog.swift in Sources */,
 				255BC8F225DEB9F100946641 /* ItemGrid.swift in Sources */,
+				25CAD8F825E28E680098A17B /* DataGrid.swift in Sources */,
 				257993BC25DF98F400DF6453 /* dota2_info.xcdatamodeld in Sources */,
 				25040ACF25DE56BD0015AA0C /* InfoCard.swift in Sources */,
 			);
@@ -762,12 +789,15 @@
 				25040B1425DE89E60015AA0C /* HeroModel.swift in Sources */,
 				25BE0FAD25DD81F7005B5664 /* Player.swift in Sources */,
 				25040AC125DE4CCD0015AA0C /* MatchDetailPage.swift in Sources */,
+				25CAD91325E29C9F0098A17B /* HistoryTablePage.swift in Sources */,
 				25040AEC25DE5A660015AA0C /* GameMode.swift in Sources */,
 				25040B6025DE97FB0015AA0C /* HeroAbility.swift in Sources */,
 				25040ABA25DE4CB80015AA0C /* MatchDetailView.swift in Sources */,
 				25040B6725DEA64B0015AA0C /* String+extensions.swift in Sources */,
 				25BE0F8225DD7C26005B5664 /* NewPlayerDialog.swift in Sources */,
+				25CAD90325E290BD0098A17B /* DataGridView.swift in Sources */,
 				255BC8F325DEB9F100946641 /* ItemGrid.swift in Sources */,
+				25CAD90825E290D40098A17B /* DataGrid.swift in Sources */,
 				257993BD25DF98F400DF6453 /* dota2_info.xcdatamodeld in Sources */,
 				25040AD025DE56BD0015AA0C /* InfoCard.swift in Sources */,
 			);
@@ -1161,6 +1191,14 @@
 				minimumVersion = 6.3.1;
 			};
 		};
+		2555C04F25E1426000994F5D /* XCRemoteSwiftPackageReference "SwiftDataTables" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pavankataria/SwiftDataTables";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.2;
+			};
+		};
 		2579938225DF821700DF6453 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
@@ -1189,6 +1227,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 25040AA325DE3C150015AA0C /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
+		};
+		2555C05025E1426000994F5D /* SwiftDataTables */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2555C04F25E1426000994F5D /* XCRemoteSwiftPackageReference "SwiftDataTables" */;
+			productName = SwiftDataTables;
 		};
 		2579938325DF821700DF6453 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -57,6 +57,6 @@ struct MatchHistory: View {
 struct MatchHistory_Previews: PreviewProvider {
     static var previews: some View {
         MatchHistory(playerId: "abc")
-            .environmentObject(MockModel())
+            .environmentObject(MatchModel())
     }
 }

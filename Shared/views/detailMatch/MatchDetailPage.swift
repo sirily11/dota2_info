@@ -17,13 +17,23 @@ struct MatchDetailPage: View {
     var body: some View {
         Group{
             if let matchData = matchData{
-                MatchDetailView(match: matchData)
-            } else {
+                TabView{
+                    MatchDetailView(match: matchData)
+                    .tabItem {
+                        Label("Home", systemImage: "house.fill")
+                    }
+                   HistoryTablePage(match: matchData)
+                        .tabItem {
+                            Label("Details", systemImage: "magnifyingglass")
+                        }
+                }
+                .padding()
+                .navigationTitle(Text("Details"))
+            } else{
                 VStack{
                     ProgressView()
-                    Text("Loading Match \(String(matchId))")
+                    Text("Loading match: \(String(matchId))")
                 }
-          
             }
         }
         .onAppear{
@@ -36,7 +46,6 @@ struct MatchDetailPage: View {
                 }
             }
         }
-        .navigationTitle(Text("Match"))
     }
 
 }
@@ -44,5 +53,6 @@ struct MatchDetailPage: View {
 struct MatchDetailPage_Previews: PreviewProvider {
     static var previews: some View {
         MatchDetailPage(matchId: 5840322763, playerId: "205258988")
+            .environmentObject(MatchModel())
     }
 }

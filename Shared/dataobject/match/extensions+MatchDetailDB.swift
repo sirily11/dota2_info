@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 //let permanentBuff, stackCount: Int?
 
@@ -24,6 +25,7 @@ extension PermanentBuff{
 
 
 extension PlayerMatch{
+
     init(from db: MatchPlayerDB){
         matchID = db.matchID.value
         playerSlot = db.playerSlot.value
@@ -79,6 +81,7 @@ extension PlayerMatch{
         abandons = db.abandons.value
         rankTier = db.rankTier.value
     }
+
     
     func toDB() -> MatchPlayerDB{
         let data = MatchPlayerDB(value: ["rankTier": rankTier, "abandons": abandons, "kda": kda, "totalXP": totalXP,
@@ -107,7 +110,33 @@ extension PlayerMatch{
 //let patch, region: Int?
 //let replayURL: String?
 extension MatchDetails{
+    
+    var skillsColor: Color {
+        get {
+            switch skill {
+            case 2:
+                return Color.orange
+            case 3:
+                return Color.red
+            default:
+                return Color.blue
+            }
+        }
+    }
 
+    var skillsDescription: String {
+        get {
+            switch skill {
+            case 2:
+                return "High"
+            case 3:
+                return "Very High"
+            default:
+                return "Normal"
+            }
+        }
+    }
+    
     
     init(from db: MatchDetailsDB){
         matchID = db.matchID.value

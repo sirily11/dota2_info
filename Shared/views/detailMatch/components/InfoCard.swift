@@ -53,6 +53,12 @@ struct InfoCard: View {
                 }
                 Spacer()
                 VStack{
+                    Text(match.skillsDescription)
+                        .padding(4)
+                        .background(match.skillsColor)
+                        .cornerRadius(10)
+                        
+                        
                     Text("\(gameMode?.localized ?? gameMode?.name ?? "")")
                     Text("\(matchModel.getRegionById(String(match.region ?? 0)))")
                 }
