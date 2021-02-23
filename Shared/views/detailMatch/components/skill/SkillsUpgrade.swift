@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Kingfisher
+import SDWebImageSwiftUI
 
 let minimumWidth: CGFloat = 120
 
@@ -39,7 +39,7 @@ struct SkillsImage: View {
     var body: some View {
         Group{
             if let img = skill?.img{
-                KFImage(URL(string: img.getAssetURL())!)
+                WebImage(url: URL(string: img.getAssetURL())!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .onTapGesture {
@@ -66,7 +66,7 @@ struct SkillsDetail: View {
     var body: some View {
         VStack{
             if let img = skill.img{
-                KFImage(URL(string: img.getAssetURL())!)
+                WebImage(url: URL(string: img.getAssetURL())!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 100)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension DataGridView{
-    private func getMaxRowCellWidth(index: Int) -> Int{
+    static func getMaxRowCellWidth(index: Int, dataGrid: DataGrid) -> Int{
         var maxWidth = 0
         for row in dataGrid.rows{
             if index >= row.cells.count{
@@ -23,31 +23,42 @@ extension DataGridView{
         
         return maxWidth
     }
+    
+    @ViewBuilder
+    static func buildHeader(dataGrid: DataGrid ) -> some View{
+        let maxWidths: [Int] = dataGrid.columns.enumerated().map{ (index, element) in
+            return getMaxRowCellWidth(index: index, dataGrid: dataGrid)
+            
+        }
+        HStack{
+            ForEach(0..<dataGrid.columns.count){ index -> DataCellView in
+                let column = dataGrid.columns[index]
+               
+                return DataCellView(view: column.content,height: 40, width: maxWidths[index])
+            }
+        }
+      
+        .background(Color.primary.opacity(0.4))
+    }
 
 }
 
 struct DataGridView: View {
     let dataGrid: DataGrid
     let showHeader: Bool
+    
+
 
     var body: some View {
         let maxWidths: [Int] = dataGrid.columns.enumerated().map{ (index, element) in
-            return getMaxRowCellWidth(index: index)
+            return DataGridView.getMaxRowCellWidth(index: index, dataGrid: dataGrid)
             
         }
 
         VStack(alignment: .leading){
             
                 if showHeader{
-                    HStack{
-                        ForEach(0..<dataGrid.columns.count){ index -> DataCellView in
-                            let column = dataGrid.columns[index]
-                           
-                            return DataCellView(view: column.content,height: 40, width: maxWidths[index])
-                        }
-                    }
-                  
-                    .background(Color.primary.opacity(0.4))
+                    DataGridView.buildHeader(dataGrid: dataGrid)
                 }
                
                     ForEach(dataGrid.rows){

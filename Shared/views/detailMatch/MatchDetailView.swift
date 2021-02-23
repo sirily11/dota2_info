@@ -15,28 +15,28 @@ struct MatchDetailView: View {
     
     var body: some View {
         ScrollView{
-            HStack{
-                Text("比赛详情")
-                    .font(.title)
-                Button(action: {
-                    isLoading = true
-                    matchModel.findMatchDetailsById(match.matchID ?? 0, playerID: matchModel.selectedPlayer, forceFetch: true)
-                    { (details) in
-                        match = details
-                        isLoading = false
+            VStack{
+                HStack{
+                    Text("比赛详情")
+                        .font(.title)
+                    Button(action: {
+                        isLoading = true
+                        matchModel.findMatchDetailsById(match.matchID ?? 0, playerID: matchModel.selectedPlayer, forceFetch: true)
+                        { (details) in
+                            match = details
+                            isLoading = false
+                        }
+                    },
+                    label: {
+                        Image(systemName: "arrow.clockwise")
+                    })
+                    if isLoading{
+                        ProgressView()
                     }
-                },
-                label: {
-                    Image(systemName: "arrow.clockwise")
-                })
-                if isLoading{
-                    ProgressView()
+                    Spacer()
                 }
-                Spacer()
-            }
-            .padding()
-            
-            VStack(alignment: .leading){
+                .padding()
+                
                 InfoCard(match: match)
                     .padding()
                     .cornerRadius(10)

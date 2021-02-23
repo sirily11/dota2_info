@@ -34,7 +34,7 @@ struct HistoryTablePage: View {
         let rows2: [DataRow] = getPlayers(players: (match.players ?? []).filter{ player in !(player.isRadiant ?? true) } )
         
         return ScrollView([.horizontal, .vertical]) {
-            VStack {
+            VStack(alignment: .leading) {
                 HStack{
                     Text("天辉")
                     Text(String(match.radiantScore ?? 0))
@@ -54,7 +54,7 @@ struct HistoryTablePage: View {
                 .padding()
                 .font(.title2)
                 .background(Color.red)
-                DataGridView(dataGrid: DataGrid(columns: columns, rows: rows2), showHeader: false).padding()
+                DataGridView(dataGrid: DataGrid(columns: columns, rows: rows2), showHeader: true).padding()
             }
         }
     }

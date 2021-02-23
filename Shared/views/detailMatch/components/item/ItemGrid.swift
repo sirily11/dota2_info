@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Kingfisher
+import SDWebImageSwiftUI
 
 extension Collection {
 
@@ -43,7 +43,7 @@ struct ItemCeil: View {
         Group{
             if let item = item{
                 if let img = item.img{
-                    KFImage(URL(string: img.getAssetURL())!)
+                    WebImage(url: URL(string: img.getAssetURL())!)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .onTapGesture {
@@ -74,7 +74,7 @@ struct ItemInfo: View {
             if let item = item{
                 if let img = item.img{
                     VStack{
-                        KFImage(URL(string: img.getAssetURL())!)
+                        WebImage(url: URL(string: img.getAssetURL())!)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 120, height: 100)

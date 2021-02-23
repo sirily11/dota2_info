@@ -61,7 +61,7 @@
 		25040B6025DE97FB0015AA0C /* HeroAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B5E25DE97FB0015AA0C /* HeroAbility.swift */; };
 		25040B6625DEA64B0015AA0C /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B6525DEA64B0015AA0C /* String+extensions.swift */; };
 		25040B6725DEA64B0015AA0C /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B6525DEA64B0015AA0C /* String+extensions.swift */; };
-		2555C05125E1426000994F5D /* SwiftDataTables in Frameworks */ = {isa = PBXBuildFile; productRef = 2555C05025E1426000994F5D /* SwiftDataTables */; };
+		2527B22D25E56FE4002C5A32 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2527B22C25E56FE4002C5A32 /* SDWebImageSwiftUI */; };
 		255BC8F225DEB9F100946641 /* ItemGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F125DEB9F100946641 /* ItemGrid.swift */; };
 		255BC8F325DEB9F100946641 /* ItemGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F125DEB9F100946641 /* ItemGrid.swift */; };
 		255BC8F925DEE66600946641 /* SkillsUpgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F825DEE66600946641 /* SkillsUpgrade.swift */; };
@@ -215,7 +215,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2555C05125E1426000994F5D /* SwiftDataTables in Frameworks */,
 				2579938425DF821700DF6453 /* RealmSwift in Frameworks */,
 				25040AA525DE3C150015AA0C /* SwiftDate in Frameworks */,
 				2579938625DF821700DF6453 /* Realm in Frameworks */,
@@ -227,6 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2527B22D25E56FE4002C5A32 /* SDWebImageSwiftUI in Frameworks */,
 				257993D925DFE8AE00DF6453 /* UserNotifications.framework in Frameworks */,
 				2579938C25DF824E00DF6453 /* RealmSwift in Frameworks */,
 				25040AAB25DE3CED0015AA0C /* SwiftDate in Frameworks */,
@@ -543,7 +543,6 @@
 				25040AA425DE3C150015AA0C /* SwiftDate */,
 				2579938325DF821700DF6453 /* RealmSwift */,
 				2579938525DF821700DF6453 /* Realm */,
-				2555C05025E1426000994F5D /* SwiftDataTables */,
 			);
 			productName = "dota2_info (iOS)";
 			productReference = 25BE0F1925DD5D0D005B5664 /* dota2_info.app */;
@@ -566,6 +565,7 @@
 				257F804425DD8F070087D339 /* Kingfisher */,
 				25040AAA25DE3CED0015AA0C /* SwiftDate */,
 				2579938B25DF824E00DF6453 /* RealmSwift */,
+				2527B22C25E56FE4002C5A32 /* SDWebImageSwiftUI */,
 			);
 			productName = "dota2_info (macOS)";
 			productReference = 25BE0F2125DD5D0D005B5664 /* dota2_info.app */;
@@ -645,7 +645,7 @@
 				257F803C25DD8C050087D339 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				25040AA325DE3C150015AA0C /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				2579938225DF821700DF6453 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				2555C04F25E1426000994F5D /* XCRemoteSwiftPackageReference "SwiftDataTables" */,
+				2527B22B25E56FE4002C5A32 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 25BE0F1A25DD5D0D005B5664 /* Products */;
 			projectDirPath = "";
@@ -1197,12 +1197,12 @@
 				minimumVersion = 6.3.1;
 			};
 		};
-		2555C04F25E1426000994F5D /* XCRemoteSwiftPackageReference "SwiftDataTables" */ = {
+		2527B22B25E56FE4002C5A32 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pavankataria/SwiftDataTables";
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.8.2;
+				minimumVersion = 2.0.0;
 			};
 		};
 		2579938225DF821700DF6453 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
@@ -1234,10 +1234,10 @@
 			package = 25040AA325DE3C150015AA0C /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
 		};
-		2555C05025E1426000994F5D /* SwiftDataTables */ = {
+		2527B22C25E56FE4002C5A32 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2555C04F25E1426000994F5D /* XCRemoteSwiftPackageReference "SwiftDataTables" */;
-			productName = SwiftDataTables;
+			package = 2527B22B25E56FE4002C5A32 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		2579938325DF821700DF6453 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

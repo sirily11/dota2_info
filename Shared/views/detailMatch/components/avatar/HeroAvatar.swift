@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Kingfisher
+import SDWebImageSwiftUI
 
 struct HeroAvatar: View {
     @State var showDetail = false
@@ -18,7 +18,7 @@ struct HeroAvatar: View {
         ZStack(alignment: .bottomTrailing){
             if let img = hero.heroData.img{
                 LazyVStack{
-                    KFImage(URL(string: img.getAssetURL()))
+                    WebImage(url: URL(string: img.getAssetURL()))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                  
@@ -48,7 +48,7 @@ struct HeroInfoView: View {
     var body: some View {
         VStack{
             if let img = hero.heroData.img{
-                KFImage(URL(string: img.getAssetURL()))
+                WebImage(url: URL(string: img.getAssetURL()))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 100)
