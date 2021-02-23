@@ -59,13 +59,16 @@ struct MatchDetailView: View {
                     Spacer()
                 }
                 
+                
                 Section(header: Text("天辉").padding(.horizontal, 15.0).padding(.vertical, 5).background(Color.green) ){
                     if let players = match.players{
-                        ForEach(players.filter{ player in player.isRadiant! } ){
-                            player in
-                            
-                            DetailPlayerRow(player: player)
-                        }
+                        
+                            ForEach(players.filter{ player in player.isRadiant! } ){
+                                player in
+                                
+                                DetailPlayerRow(player: player)
+                            }
+                        
                     }
                    
                 }
@@ -93,6 +96,8 @@ struct MatchDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MatchDetailView(
             match: demoMatch)
+            .previewLayout(.device)
+            .environment(\.sizeCategory, .extraLarge)
             .environmentObject(MatchModel())
             .environmentObject(HeroModel())
     }

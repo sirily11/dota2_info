@@ -28,6 +28,7 @@ extension DataGridView{
 
 struct DataGridView: View {
     let dataGrid: DataGrid
+    let showHeader: Bool
 
     var body: some View {
         let maxWidths: [Int] = dataGrid.columns.enumerated().map{ (index, element) in
@@ -35,38 +36,39 @@ struct DataGridView: View {
             
         }
 
-        ScrollView([.horizontal, .vertical]){
-                VStack(alignment: .leading){
-                        HStack{
-                            ForEach(0..<dataGrid.columns.count){ index -> DataCellView in
-                                let column = dataGrid.columns[index]
-                               
-                                return DataCellView(view: column.content,height: 40, width: maxWidths[index])
-                            }
+        VStack(alignment: .leading){
+            
+                if showHeader{
+                    HStack{
+                        ForEach(0..<dataGrid.columns.count){ index -> DataCellView in
+                            let column = dataGrid.columns[index]
+                           
+                            return DataCellView(view: column.content,height: 40, width: maxWidths[index])
                         }
-                      
-                        .background(Color.primary.opacity(0.4))
-                    
-                       
-                            ForEach(dataGrid.rows){
-                                row in
-                                
-                                HStack{
-                                    ForEach(0..<row.cells.count){ index -> DataCellView in
-                                       let cell = row.cells[index]
-                                       return DataCellView(view: cell.content, height: row.height, width: maxWidths[index])
-                                    }
-                            
-                                }
-                               
-                            }
                     }
-
-                .frame(maxWidth: .infinity, maxHeight: .infinity ,alignment: .leading)
-              
+                  
+                    .background(Color.primary.opacity(0.4))
+                }
+               
+                    ForEach(dataGrid.rows){
+                        row in
+                        
+                        HStack{
+                            ForEach(0..<row.cells.count){ index -> DataCellView in
+                               let cell = row.cells[index]
+                               return DataCellView(view: cell.content, height: row.height, width: maxWidths[index])
+                            }
+                    
+                        }
+                       
+                    }
             }
 
+        .frame(maxWidth: .infinity, maxHeight: .infinity ,alignment: .leading)
+      
     }
+
+    
 }
 
 struct DataCellView: View{
@@ -82,6 +84,6 @@ struct DataCellView: View{
 
 struct DatGridView_Previews: PreviewProvider {
     static var previews: some View {
-        DataGridView(dataGrid: demoGrid)
+        DataGridView(dataGrid: demoGrid, showHeader: true)
     }
 }

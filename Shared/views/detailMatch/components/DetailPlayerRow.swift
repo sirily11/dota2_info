@@ -26,21 +26,7 @@ struct DetailPlayerRow: View {
                         }
                         
                         VStack(alignment: .leading){
-                            Text(player.personaname ?? "匿名玩家")
-                                .lineLimit(2)
-                                .foregroundColor(Color.red)
-                                .font(.title)
-                                .onTapGesture {
-                                    showUserDetails = true && player.accountID != nil
-                                }
-                                .popover(isPresented: $showUserDetails, content: {
-                                    Group{
-                                        if let accountId = player.accountID{
-                                            AvatarView(playerId: String(accountId))
-                                        }
-                                    }
-                                })
-
+                            PlayerNameView(player: player, normalFont: false)
                             
                             Text(hero.heroData.localizedName!)
                                 .bold()
@@ -139,7 +125,6 @@ struct DetailPlayerRow: View {
             
             
         }
-        
         .cornerRadius(10)
         
           .overlay(

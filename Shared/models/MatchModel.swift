@@ -126,7 +126,6 @@ class MatchModel : ObservableObject{
            [weak self] (data, resp, err) in
             
             guard let data = data else {
-                self?.isLoadingMatches = false
                 return
                 
             }

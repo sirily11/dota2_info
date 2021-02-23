@@ -13,22 +13,33 @@ struct MatchDetailPage: View {
     let matchId: Int
     let playerId: String
     @State var matchData: MatchDetails? = nil
+    @State var showDetail = false
     
     var body: some View {
         Group{
             if let matchData = matchData{
-                TabView{
-                    MatchDetailView(match: matchData)
-                    .tabItem {
-                        Label("Home", systemImage: "house.fill")
-                    }
-                   HistoryTablePage(match: matchData)
-                        .tabItem {
-                            Label("Details", systemImage: "magnifyingglass")
+                
+                ZStack {
+                    TabView{
+                            MatchDetailView(match: matchData)
+                                .tabItem {
+                                    Label("Home", systemImage: "house.fill")
+                                }
+
+                        
+                       
+                           HistoryTablePage(match: matchData)
+                                .tabItem {
+                                    Label("Details", systemImage: "magnifyingglass")
+                                }
                         }
+                        .transition(.slide)
+                        .padding()
+                        .navigationTitle(Text("Details"))
+                        .opacity(showDetail ? 1: 0)
+                    
                 }
-                .padding()
-                .navigationTitle(Text("Details"))
+                
             } else{
                 VStack{
                     ProgressView()
@@ -42,6 +53,12 @@ struct MatchDetailPage: View {
                     match in
                     withAnimation{
                         matchData = match
+                    }
+                   
+                    Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
+                        withAnimation{
+                            showDetail = true
+                        }
                     }
                 }
             }

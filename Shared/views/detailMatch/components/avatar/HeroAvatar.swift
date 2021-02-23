@@ -17,10 +17,13 @@ struct HeroAvatar: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing){
             if let img = hero.heroData.img{
-                KFImage(URL(string: img.getAssetURL()))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 60)
+                LazyVStack{
+                    KFImage(URL(string: img.getAssetURL()))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                 
+                }
+                .frame(width: 100, height: 60)
             }
           
             Text(String(Int(player.level  ?? 0)))

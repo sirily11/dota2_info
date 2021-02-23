@@ -14,13 +14,6 @@ struct HistoryTablePage: View {
     let emptyHero = MatchHero(items: [], ability: [], heroData: DotaHero(id: 0, name: "", localizedName: "", primaryAttr: "", attackType: "", roles: [], img: nil, icon: nil, baseHealth: 0, baseHealthRegen: 0, baseMana: 0, baseManaRegen: 0, baseArmor: 0, baseMr: 0, baseAttackMin: 0, baseAttackMax: 0, baseStr: 0, baseAgi: 0, baseInt: 0, strGain: 0, agiGain: 0, intGain: 0, attackRange: 0, projectileSpeed: 0, attackRate: 0, moveSpeed: 0, turnRate: 0, cmEnabled: false, legs: 0))
     
     var body: some View {
-        let totalDmg1 = match.players?.filter{player in player.isRadiant ?? true }.reduce(0, { (prev, current) -> Double in
-            prev + (current.heroDamage ?? 0)
-        }) ?? 1
-        
-        let totalDmg2 = match.players?.filter{player in !(player.isRadiant ?? true) }.reduce(0, { (prev, current) -> Double in
-            prev + (current.heroDamage ?? 0)
-        }) ?? 1
         
         let columns: [DataColumn] = [
             DataColumn(sortKey: "Hero", content: AnyView(Text(""))),
@@ -36,17 +29,58 @@ struct HistoryTablePage: View {
             DataColumn(sortKey: "Skills", content: AnyView(Text("Skills")))
         ]
         
-        let rows: [DataRow] = (match.players ?? []).enumerated().map{
+        let rows: [DataRow] = getPlayers(players: (match.players ?? []).filter{ player in player.isRadiant ?? true } )
+        
+        let rows2: [DataRow] = getPlayers(players: (match.players ?? []).filter{ player in !(player.isRadiant ?? true) } )
+        
+        return ScrollView([.horizontal, .vertical]) {
+            VStack {
+                HStack{
+                    Text("天辉")
+                    Text(String(match.radiantScore ?? 0))
+                    Text((match.radiantWin ?? true) ? "Win" : "Lose")
+                    Spacer()
+                }
+                .padding()
+                .font(.title2)
+                .background(Color.green)
+                DataGridView(dataGrid: DataGrid(columns: columns, rows: rows), showHeader: true).padding()
+                HStack{
+                    Text("夜魇")
+                    Text(String(match.direScore ?? 0))
+                    Text(!(match.radiantWin ?? true) ? "Win" : "Lose")
+                    Spacer()
+                }
+                .padding()
+                .font(.title2)
+                .background(Color.red)
+                DataGridView(dataGrid: DataGrid(columns: columns, rows: rows2), showHeader: false).padding()
+            }
+        }
+    }
+}
+
+extension HistoryTablePage{
+    func getPlayers(players: [PlayerMatch]) -> [DataRow]{
+        let totalDmg1 = match.players?.filter{player in player.isRadiant ?? true }.reduce(0, { (prev, current) -> Double in
+            prev + (current.heroDamage ?? 0)
+        }) ?? 1
+        
+        let totalDmg2 = match.players?.filter{player in !(player.isRadiant ?? true) }.reduce(0, { (prev, current) -> Double in
+            prev + (current.heroDamage ?? 0)
+        }) ?? 1
+        
+      return  players.enumerated().map{
             (index, player) in
             let hero: MatchHero? = heroModel.findHeroById(String(player.heroID!), with: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.backpack0, player.backpack1, player.backpack2, ])
             
-            let percentage = index < 6 ? ((player.heroDamage ?? 1) / totalDmg1) :  ((player.heroDamage ?? 1) / totalDmg2)
+            let percentage = index < 5 ? ((player.heroDamage ?? 1) / totalDmg1) :  ((player.heroDamage ?? 1) / totalDmg2)
             
             return DataRow(sortKey: "",
                            cells: [
                             DataRowCell(content:  AnyView(HeroAvatar(player: player, hero: hero ?? emptyHero)), width: 100),
-                            DataRowCell(content:  AnyView(Text(index < 6 ? "天辉" : "夜魇"))),
-                            DataRowCell(content:  AnyView(Text(player.personaname ?? "匿名玩家"))),
+                            DataRowCell(content:  AnyView(Text(index < 5 ? "天辉" : "夜魇"))),
+                            DataRowCell(content:  AnyView(PlayerNameView(player: player, normalFont: true))),
                             DataRowCell(content:  AnyView(ItemGrid(items: hero?.items ?? [])), width: 200),
                             DataRowCell(content:  AnyView(Text(String(player.level ?? 0)))),
                             DataRowCell(content:  AnyView(Text(String(player.netWorth ?? 0)))),
@@ -59,8 +93,6 @@ struct HistoryTablePage: View {
                            height: 140
             )
         }
-        
-        return DataGridView(dataGrid: DataGrid(columns: columns, rows: rows)).padding()
     }
 }
 

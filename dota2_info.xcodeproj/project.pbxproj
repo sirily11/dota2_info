@@ -120,6 +120,8 @@
 		25CAD90825E290D40098A17B /* DataGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD8F725E28E680098A17B /* DataGrid.swift */; };
 		25CAD91225E29C9F0098A17B /* HistoryTablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */; };
 		25CAD91325E29C9F0098A17B /* HistoryTablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */; };
+		25CAD91925E2EAE50098A17B /* PlayerNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91825E2EAE50098A17B /* PlayerNameView.swift */; };
+		25CAD91A25E2EAE50098A17B /* PlayerNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91825E2EAE50098A17B /* PlayerNameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +207,7 @@
 		25CAD8F725E28E680098A17B /* DataGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGrid.swift; sourceTree = "<group>"; };
 		25CAD90125E290BD0098A17B /* DataGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGridView.swift; sourceTree = "<group>"; };
 		25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTablePage.swift; sourceTree = "<group>"; };
+		25CAD91825E2EAE50098A17B /* PlayerNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +329,7 @@
 			children = (
 				257993DE25E0F8B000DF6453 /* HeroAvatar.swift */,
 				25040AC625DE51A60015AA0C /* avatarView.swift */,
+				25CAD91825E2EAE50098A17B /* PlayerNameView.swift */,
 			);
 			path = avatar;
 			sourceTree = "<group>";
@@ -747,6 +751,7 @@
 				25040AEB25DE5A660015AA0C /* GameMode.swift in Sources */,
 				25040B5F25DE97FB0015AA0C /* HeroAbility.swift in Sources */,
 				25040AB925DE4CB80015AA0C /* MatchDetailView.swift in Sources */,
+				25CAD91925E2EAE50098A17B /* PlayerNameView.swift in Sources */,
 				25040B6625DEA64B0015AA0C /* String+extensions.swift in Sources */,
 				25CAD90225E290BD0098A17B /* DataGridView.swift in Sources */,
 				25BE0F7D25DD7C15005B5664 /* NewPlayerDialog.swift in Sources */,
@@ -793,6 +798,7 @@
 				25040AEC25DE5A660015AA0C /* GameMode.swift in Sources */,
 				25040B6025DE97FB0015AA0C /* HeroAbility.swift in Sources */,
 				25040ABA25DE4CB80015AA0C /* MatchDetailView.swift in Sources */,
+				25CAD91A25E2EAE50098A17B /* PlayerNameView.swift in Sources */,
 				25040B6725DEA64B0015AA0C /* String+extensions.swift in Sources */,
 				25BE0F8225DD7C26005B5664 /* NewPlayerDialog.swift in Sources */,
 				25CAD90325E290BD0098A17B /* DataGridView.swift in Sources */,
