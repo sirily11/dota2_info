@@ -15,6 +15,9 @@ struct MatchDetails: Codable {
     let skill, startTime, towerStatusDire, towerStatusRadiant: Int?
     let replaySalt, seriesID, seriesType: Int?
     let players: [PlayerMatch]?
+    let radiantGoldAdv: [Int]?
+    let radiantXPAdv: [Int]?
+    let chat: [Chat]?
     let patch, region: Int?
     let replayURL: String?
     var inDB = false
@@ -45,8 +48,24 @@ struct MatchDetails: Codable {
         case seriesType = "series_type"
         case players, patch, region
         case replayURL = "replay_url"
+        case chat
+        case radiantGoldAdv = "radiant_gold_adv"
+        case radiantXPAdv = "radiant_xp_adv"
     }
 }
+
+// MARK - Chat
+struct Chat: Codable {
+    let time: Int?
+    let type, key: String?
+    let slot, playerSlot: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case time, type, key, slot
+        case playerSlot = "player_slot"
+    }
+}
+
 
 // MARK: - Player
 struct PlayerMatch: Codable, Identifiable {
@@ -74,6 +93,32 @@ struct PlayerMatch: Codable, Identifiable {
     let isRadiant: Bool?
     let win, lose, totalGold, totalXP: Int?
     let kda, abandons, rankTier: Double?
+    /**
+     Skill name: {
+        "heroname": number_of_usages
+     }
+     */
+    let abilityTargets: [String: [String: Int]]?
+    let abilityUses: [String: Int]?
+    /**
+     Skill name?: {
+        heroname: damage
+     }
+        null means regular attack
+     */
+    let damageTargets: [String: [String: Double]]?
+    let goldT: [Int]?
+    let lhT: [Int]?
+    let xpT: [Int]?
+    let purchaseLog: [PurchaseLog]?
+    /**
+    Name: Number of kills
+     */
+    let killedBy: [String: Int]?
+    let times: [Int]?
+    let teamfightParticipation: Double?
+    let itemUsage: [String: Int]?
+    
 
     enum CodingKeys: String, CodingKey {
         case matchID = "match_id"
@@ -115,13 +160,30 @@ struct PlayerMatch: Codable, Identifiable {
         case lobbyType = "lobby_type"
         case gameMode = "game_mode"
         case isContributor = "is_contributor"
-        case patch, region, isRadiant, win, lose
+        case patch, region, isRadiant, win, lose, times
         case totalGold = "total_gold"
         case totalXP = "total_xp"
         case kda, abandons
         case rankTier = "rank_tier"
+        case abilityTargets = "ability_targets"
+        case abilityUses = "ability_uses"
+        case goldT = "gold_t"
+        case damageTargets = "damage_targets"
+        case killedBy = "killed_by"
+        case lhT = "lh_t"
+        case xpT = "xp_t"
+        case purchaseLog = "purchase_log"
+        case teamfightParticipation = "teamfight_participation"
+        case itemUsage = "item_usage"
     }
 }
+
+// MARK: - PurchaseLog
+struct PurchaseLog: Codable {
+    let time: Int?
+    let key: String?
+}
+
 
 // MARK: - Benchmarks
 struct Benchmarks: Codable {

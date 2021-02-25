@@ -61,6 +61,8 @@
 		25040B6025DE97FB0015AA0C /* HeroAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B5E25DE97FB0015AA0C /* HeroAbility.swift */; };
 		25040B6625DEA64B0015AA0C /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B6525DEA64B0015AA0C /* String+extensions.swift */; };
 		25040B6725DEA64B0015AA0C /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B6525DEA64B0015AA0C /* String+extensions.swift */; };
+		250F6F6025E784610038B3CF /* matchenums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F6F5F25E784610038B3CF /* matchenums.swift */; };
+		250F6F6125E784610038B3CF /* matchenums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F6F5F25E784610038B3CF /* matchenums.swift */; };
 		2527B22D25E56FE4002C5A32 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2527B22C25E56FE4002C5A32 /* SDWebImageSwiftUI */; };
 		255BC8F225DEB9F100946641 /* ItemGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F125DEB9F100946641 /* ItemGrid.swift */; };
 		255BC8F325DEB9F100946641 /* ItemGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255BC8F125DEB9F100946641 /* ItemGrid.swift */; };
@@ -168,6 +170,7 @@
 		25040B5725DE975C0015AA0C /* ItemIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemIds.swift; sourceTree = "<group>"; };
 		25040B5E25DE97FB0015AA0C /* HeroAbility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroAbility.swift; sourceTree = "<group>"; };
 		25040B6525DEA64B0015AA0C /* String+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
+		250F6F5F25E784610038B3CF /* matchenums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matchenums.swift; sourceTree = "<group>"; };
 		255BC8F125DEB9F100946641 /* ItemGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGrid.swift; sourceTree = "<group>"; };
 		255BC8F825DEE66600946641 /* SkillsUpgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsUpgrade.swift; sourceTree = "<group>"; };
 		257993BA25DF98F400DF6453 /* v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = v2.xcdatamodel; sourceTree = "<group>"; };
@@ -292,6 +295,7 @@
 				257F806C25DE24980087D339 /* Match.swift */,
 				25040AB025DE46C20015AA0C /* MatchDetails.swift */,
 				257993CD25DF9D9200DF6453 /* extensions+MatchDetailDB.swift */,
+				250F6F5F25E784610038B3CF /* matchenums.swift */,
 			);
 			path = match;
 			sourceTree = "<group>";
@@ -758,6 +762,7 @@
 				255BC8F225DEB9F100946641 /* ItemGrid.swift in Sources */,
 				25CAD8F825E28E680098A17B /* DataGrid.swift in Sources */,
 				257993BC25DF98F400DF6453 /* dota2_info.xcdatamodeld in Sources */,
+				250F6F6025E784610038B3CF /* matchenums.swift in Sources */,
 				25040ACF25DE56BD0015AA0C /* InfoCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -805,6 +810,7 @@
 				255BC8F325DEB9F100946641 /* ItemGrid.swift in Sources */,
 				25CAD90825E290D40098A17B /* DataGrid.swift in Sources */,
 				257993BD25DF98F400DF6453 /* dota2_info.xcdatamodeld in Sources */,
+				250F6F6125E784610038B3CF /* matchenums.swift in Sources */,
 				25040AD025DE56BD0015AA0C /* InfoCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
