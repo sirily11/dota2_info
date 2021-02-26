@@ -9,9 +9,10 @@ import SwiftUI
 
 struct MatchDetailView: View {
     @EnvironmentObject var matchModel : MatchModel
-    @State var match: MatchDetails
+    let match: MatchDetails
     @State var isLoading = false
-
+    let updateDetail: (MatchDetails) -> Void
+    
     
     var body: some View {
         ScrollView{
@@ -19,20 +20,21 @@ struct MatchDetailView: View {
                 HStack{
                     Text("比赛详情")
                         .font(.title)
-                    Button(action: {
-                        isLoading = true
-                        matchModel.findMatchDetailsById(match.matchID ?? 0, playerID: matchModel.selectedPlayer, forceFetch: true)
-                        { (details) in
-                            match = details
-                            isLoading = false
-                        }
-                    },
-                    label: {
+                    Button(action: refreshMatch)
+                    {
                         Image(systemName: "arrow.clockwise")
-                    })
+                    }
+                    
+                    if !match.isParsed{
+                        Button(action: parseMatch){
+                            Text("Parse the match")
+                        }
+                    }
+                    
                     if isLoading{
                         ProgressView()
                     }
+                    
                     Spacer()
                 }
                 .padding()
@@ -40,11 +42,11 @@ struct MatchDetailView: View {
                 InfoCard(match: match)
                     .padding()
                     .cornerRadius(10)
-                          .overlay(
-                              RoundedRectangle(cornerRadius: 10)
-                                  .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.1), lineWidth: 1)
-                          )
-                          .padding([.top, .horizontal])
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(.sRGB, red: 150/255, green: 150/255, blue: 150/255, opacity: 0.1), lineWidth: 1)
+                    )
+                    .padding([.top, .horizontal])
                 
                 HStack{
                     Spacer()
@@ -54,7 +56,7 @@ struct MatchDetailView: View {
                         } else{
                             Text(link)
                         }
-                       
+                        
                     }
                     Spacer()
                 }
@@ -63,16 +65,16 @@ struct MatchDetailView: View {
                 Section(header: Text("天辉").padding(.horizontal, 15.0).padding(.vertical, 5).background(Color.green) ){
                     if let players = match.players{
                         
-                            ForEach(players.filter{ player in player.isRadiant! } ){
-                                player in
-                                
-                                DetailPlayerRow(player: player)
-                            }
+                        ForEach(players.filter{ player in player.isRadiant! } ){
+                            player in
+                            
+                            DetailPlayerRow(player: player)
+                        }
                         
                     }
-                   
+                    
                 }
-        
+                
                 
                 Section(header: Text("夜餍").padding(.horizontal, 15.0).padding(.vertical, 5).background(Color.red)){
                     if let players = match.players{
@@ -82,7 +84,7 @@ struct MatchDetailView: View {
                             DetailPlayerRow(player: player)
                         }
                     }
-                   
+                    
                 }
             }
             .padding(.all)
@@ -90,12 +92,46 @@ struct MatchDetailView: View {
     }
 }
 
+extension MatchDetailView{
+    func refreshMatch(){
+        isLoading = true
+        matchModel.findMatchDetailsById(match.matchID ?? 0, playerID: matchModel.selectedPlayer, forceFetch: true)
+        { (details) in
+            updateDetail(details)
+            isLoading = false
+        }
+    }
+    
+    func parseMatch(){
+        isLoading = true
+        if let matchId = match.matchID{
+            matchModel.sendParseRequest(matchId: String(matchId)){
+                jobId in
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: true){
+                    timer in
+                    matchModel.getParseStatus(jobId: String(jobId)){
+                        finished in
+                        if finished{
+                            timer.invalidate()
+                            refreshMatch()
+                        }
+                        
+                    }
+                }
+            }
+        }
+        
+    }
+}
 
 
 struct MatchDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MatchDetailView(
-            match: demoMatch)
+            match: demoMatch){
+            match in
+            
+        }
             .previewLayout(.device)
             .environment(\.sizeCategory, .extraLarge)
             .environmentObject(MatchModel())

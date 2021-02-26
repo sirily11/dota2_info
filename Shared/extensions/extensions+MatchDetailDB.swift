@@ -10,6 +10,34 @@ import SwiftUI
 
 //let permanentBuff, stackCount: Int?
 
+
+
+extension Chat{
+    init(from db: ChatDB){
+        type = db.type
+        key = db.key
+        time = db.time.value
+        slot = db.slot.value
+        playerSlot = db.playerSlot.value
+    }
+    
+    func toDB() -> ChatDB{
+        let data = self.dict
+        return ChatDB(value: data ?? [])
+    }
+}
+
+extension PurchaseLog{
+    init(from db: PurchaseLogDB) {
+        time = db.time.value
+        key = db.key
+    }
+    
+    func toDB() -> PurchaseLogDB{
+        return PurchaseLogDB(value: self.dict ?? [])
+    }
+}
+
 extension PermanentBuff{
     init(from db: PermanentBuffDB){
         permanentBuff = db.permanentBuff.value
@@ -18,14 +46,14 @@ extension PermanentBuff{
     
     
     func toDB() -> PermanentBuffDB{
-        let data = PermanentBuffDB(value: ["permanentBuff": permanentBuff, "stackCount": stackCount ])
-        return data
+        
+        return PermanentBuffDB(value: self.dict ?? [])
     }
 }
 
 
 extension PlayerMatch{
-
+    
     init(from db: MatchPlayerDB){
         matchID = db.matchID.value
         playerSlot = db.playerSlot.value
@@ -80,36 +108,44 @@ extension PlayerMatch{
         kda = db.kda.value
         abandons = db.abandons.value
         rankTier = db.rankTier.value
-    }
+        
+        abilityTargets = db.abilityTargets?.dictionaryValue() as? [String: [String: Int]]
+    
+        abilityUses = db.abilityUses?.dictionaryValue() as? [String: Int ]
 
+        damageTargets = db.damageTargets?.dictionaryValue() as? [String: [String: Double]]
+        
+        killedBy = db.killedBy?.dictionaryValue() as? [String: Int]
+        
+        itemUsage = db.itemUsage?.dictionaryValue() as? [String: Int]
+        
+        
+        goldT = db.goldT.map{ g in g}
+        lhT = db.lhT.map{l in l}
+        xpT = db.xpT.map{x in x}
+        purchaseLog = db.purchaseLog.map{p in PurchaseLog(from: p) }
+        times = db.times.map{t in t }
+        teamfightParticipation = db.teamfightParticipation.value
+        
+    }
+    
     
     func toDB() -> MatchPlayerDB{
-        let data = MatchPlayerDB(value: ["rankTier": rankTier, "abandons": abandons, "kda": kda, "totalXP": totalXP,
-                                         "totalGold": totalGold, "lose": lose, "win": win, "isRadiant": isRadiant,
-                                         "region": region, "patch": patch, "isContributor": isContributor, "gameMode": gameMode,
-                                         "lobbyType": lobbyType, "cluster": cluster, "duration": duration, "startTime": startTime,
-                                         "radiantWin": radiantWin, "personaname": personaname, "xpPerMin": xpPerMin, "towerDamage": towerDamage,
-                                         "partySize": partySize, "partyID": partyID, "netWorth": netWorth, "level": level, "leaverStatus": leaverStatus,
-                                         "lastHits": lastHits, "kills": kills, "itemNeutral": itemNeutral, "item5": item5, "item4": item4, "item3": item3,
-                                         "item2": item2, "item1": item1, "item0": item0, "heroID": heroID, "heroHealing": heroHealing, "heroDamage": heroDamage,
-                                         "goldSpent": goldSpent, "goldPerMin": goldPerMin, "gold": gold, "denies": denies, "deaths":deaths,"backpack3": backpack3,
-                                         "backpack2": backpack2, "backpack1": backpack1, "backpack0": backpack0,"permanentBuffs": permanentBuffs?.map{ p in p.toDB()},
-                                            "assists": assists, "accountID": accountID, "abilityUpgradesArr": abilityUpgradesArr, "playerSlot": playerSlot,
-                                            "matchID": matchID])
-        return data
+        return MatchPlayerDB(value: self.dict ?? [])
     }
 }
-//let matchID, barracksStatusDire, barracksStatusRadiant, cluster: Int?
-//let direScore, duration, engine, firstBloodTime: Int?
-//let gameMode, humanPlayers, leagueid, lobbyType: Int?
-//let matchSeqNum, negativeVotes, positiveVotes, radiantScore: Int?
-//let radiantWin: Bool?
-//let skill, startTime, towerStatusDire, towerStatusRadiant: Int?
-//let replaySalt, seriesID, seriesType: Int?
-//let players: [PlayerMatch]?
-//let patch, region: Int?
-//let replayURL: String?
+
 extension MatchDetails{
+    
+    var isParsed: Bool{
+        get {
+            if chat == nil{
+                return false
+            }
+            
+            return true
+        }
+    }
     
     var skillsColor: Color {
         get {
@@ -123,7 +159,7 @@ extension MatchDetails{
             }
         }
     }
-
+    
     var skillsDescription: String {
         get {
             switch skill {
@@ -171,16 +207,12 @@ extension MatchDetails{
         patch  = db.patch.value
         region = db.region.value
         replayURL = db.replayURL
+        chat = db.chat.map{ c in Chat(from: c)}
+        radiantGoldAdv = db.radiantGoldAdv.map{v in v}
+        radiantXPAdv = db.radiantXPAdv.map{ v in v}
     }
     
     func toDB(playerId: String) -> MatchDetailsDB{
-        let data = MatchDetailsDB(value: ["replayURL": replayURL, "region": region, "patch": patch, "players": players?.map{p in p.toDB() }, "seriesType": seriesType,
-                                          "seriesID": seriesID, "replaySalt": replaySalt, "towerStatusRadiant": towerStatusRadiant, "towerStatusDire": towerStatusDire,
-                                          "startTime": startTime,"skill": skill, "radiantWin": radiantWin, "radiantScore": radiantScore, "positiveVotes": positiveVotes,
-                                          "negativeVotes": negativeVotes, "matchSeqNum": matchSeqNum, "lobbyType": lobbyType, "leagueid": leagueid, "humanPlayers": humanPlayers, "gameMode": gameMode, "firstBloodTime": firstBloodTime, "engine": engine, "duration": duration,
-                                          "direScore": direScore, "cluster": cluster, "barracksStatusRadiant": barracksStatusRadiant, "barracksStatusDire": barracksStatusDire, "matchID": matchID, "playerId": playerId
-        ])
-        
-        return data
+        return MatchDetailsDB(value: self.dict ?? [])
     }
 }

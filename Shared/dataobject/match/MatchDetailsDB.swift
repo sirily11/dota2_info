@@ -8,11 +8,19 @@
 import Foundation
 import RealmSwift
 
+class ChatDB: Object{
+    let time = RealmOptional<Int>()
+    @objc dynamic var type: String? = ""
+    @objc dynamic var key: String? = ""
+    let slot = RealmOptional<Int>()
+    let playerSlot = RealmOptional<Int>()
+}
+
 class MatchDetailsDB: Object {
     @objc dynamic var _id = ObjectId.generate()
     /// Who store this match
     @objc dynamic var playerId: String = ""
-
+    
     let matchID = RealmOptional<Int>()
     let barracksStatusDire = RealmOptional<Int>()
     let barracksStatusRadiant = RealmOptional<Int>()
@@ -25,7 +33,11 @@ class MatchDetailsDB: Object {
     let patch = RealmOptional<Int>(), region = RealmOptional<Int>()
     @objc dynamic var replayURL: String? = ""
     let replaySalt = RealmOptional<Int>(), seriesID = RealmOptional<Int>(), seriesType = RealmOptional<Int>()
+    
     let players = List<MatchPlayerDB>()
+    let radiantGoldAdv = List<Int>()
+    let radiantXPAdv = List<Int>()
+    let chat = List<ChatDB>()
 }
 
 class MatchPlayerDB: Object {
@@ -48,8 +60,26 @@ class MatchPlayerDB: Object {
     let gameMode = RealmOptional<Int>(), patch = RealmOptional<Int>(), region = RealmOptional<Int>(), win = RealmOptional<Int>(), lose = RealmOptional<Int>(), totalGold = RealmOptional<Int>(), totalXP = RealmOptional<Int>()
     let kda = RealmOptional<Double>(), abandons = RealmOptional<Double>(), rankTier = RealmOptional<Double>()
     let permanentBuff = List<PermanentBuffDB>()
+    
+    @objc dynamic var abilityTargets: String? = ""
+    @objc dynamic var abilityUses: String? = ""
+    @objc dynamic var damageTargets: String?
+    let goldT = List<Int>()
+    let lhT = List<Int>()
+    let xpT = List<Int>()
+    let purchaseLog = List<PurchaseLogDB>()
+    @objc dynamic var killedBy: String? = ""
+    let times = List<Int>()
+    let teamfightParticipation = RealmOptional<Double>()
+    @objc dynamic var itemUsage: String?
+    
 }
 
 class PermanentBuffDB: Object {
     let permanentBuff = RealmOptional<Int>(), stackCount = RealmOptional<Int>()
+}
+
+class PurchaseLogDB: Object{
+    let time = RealmOptional<Int>()
+    @objc dynamic var key: String? = ""
 }

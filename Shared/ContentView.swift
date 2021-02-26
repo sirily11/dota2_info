@@ -45,7 +45,10 @@ struct ContentView: View {
                     Group{
                             VStack{
                                 if let match = searchedMatch{
-                                    MatchDetailView(match: match)
+                                    MatchDetailView(match: match){
+                                        match in
+                                        self.searchedMatch = match
+                                    }
                                 } else{
                                     Text("Match Not Found")
                                 }

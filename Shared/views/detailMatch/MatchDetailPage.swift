@@ -21,22 +21,41 @@ struct MatchDetailPage: View {
                 
                 ZStack {
                     TabView{
-                            MatchDetailView(match: matchData)
-                                .tabItem {
-                                    Label("Home", systemImage: "house.fill")
-                                }
-
+                        MatchDetailView(match: matchData){
+                            match in
+                            self.matchData = match
+                        }
+                            .tabItem {
+                                Label("Home", systemImage: "house.fill")
+                            }
                         
-                       
-                           HistoryTablePage(match: matchData)
-                                .tabItem {
-                                    Label("Details", systemImage: "magnifyingglass")
+                        HistoryTablePage(match: matchData)
+                            .tabItem {
+                                Label("Details", systemImage: "magnifyingglass")
+                            }
+                        if matchData.isParsed{
+                            Text("Chart")
+                                .tabItem{
+                                    Label("Chart", systemImage: "chart.bar.fill")
+                                }
+                            
+                            Text("Damage")
+                                .tabItem{
+                                    Label("Damage", systemImage: "chart.bar.fill")
+                                }
+                            
+                            Text("Purchase logs")
+                                .tabItem{
+                                    Label("Purchase logs", systemImage: "chart.bar.fill")
                                 }
                         }
-                        .transition(.slide)
-                        .padding()
-                        .navigationTitle(Text("Details"))
-                        .opacity(showDetail ? 1: 0)
+                        
+                       
+                    }
+                    .transition(.slide)
+                    .padding()
+                    .navigationTitle(Text("Details"))
+                    .opacity(showDetail ? 1: 0)
                     
                 }
                 
@@ -54,7 +73,7 @@ struct MatchDetailPage: View {
                     withAnimation{
                         matchData = match
                     }
-                   
+                    
                     Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (timer) in
                         withAnimation{
                             showDetail = true
@@ -64,7 +83,7 @@ struct MatchDetailPage: View {
             }
         }
     }
-
+    
 }
 
 struct MatchDetailPage_Previews: PreviewProvider {
