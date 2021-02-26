@@ -95,7 +95,7 @@ struct MatchDetailView: View {
 extension MatchDetailView{
     func refreshMatch(){
         isLoading = true
-        matchModel.findMatchDetailsById(match.matchID ?? 0, playerID: matchModel.selectedPlayer, forceFetch: true)
+        matchModel.findMatchDetailsById(String(match.matchID ?? 0), playerID: matchModel.selectedPlayer, forceFetch: true)
         { (details) in
             updateDetail(details)
             isLoading = false

@@ -11,7 +11,7 @@ struct MatchDetailPage: View {
     @EnvironmentObject var matchModel: MatchModel
     
     let matchId: Int
-    let playerId: String
+    let playerId: String?
     @State var matchData: MatchDetails? = nil
     @State var showDetail = false
     
@@ -68,7 +68,7 @@ struct MatchDetailPage: View {
         }
         .onAppear{
             if matchData == nil{
-                matchModel.findMatchDetailsById(matchId, playerID: playerId){
+                matchModel.findMatchDetailsById(String(matchId), playerID: playerId){
                     match in
                     withAnimation{
                         matchData = match

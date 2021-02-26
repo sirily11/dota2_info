@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MatchHistory: View {
+    @State var timer: Timer? = nil
     @EnvironmentObject var matchModel: MatchModel
-    let playerId: String
+    let playerId: String?
     @State private var searchText = ""
     @State private var showCancelButton: Bool = false
     @State var count = 0
@@ -47,9 +48,15 @@ struct MatchHistory: View {
            
             .onAppear{
                 matchModel.findMatchByPlayer(playerId: playerId)
-                Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { (timer) in
-                    matchModel.fetchAndPushNotification(playerId: playerId)
+                if let playerId = playerId{
+                    timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { (t) in
+                        matchModel.fetchAndPushNotification(playerId: playerId)
+                    }
                 }
+                
+            }
+            .onDisappear{
+                timer?.invalidate()
             }
     }
 }

@@ -238,12 +238,12 @@ extension MatchDetails{
         radiantXPAdv = db.radiantXPAdv.map{ v in v}
     }
     
-    func toDB(playerId: String) -> MatchDetailsDB{
+    func toDB(playerId: String?) -> MatchDetailsDB{
         let data = MatchDetailsDB(value: ["replayURL": replayURL, "region": region, "patch": patch, "players": players?.map{p in p.toDB() }, "seriesType": seriesType,
                                           "seriesID": seriesID, "replaySalt": replaySalt, "towerStatusRadiant": towerStatusRadiant, "towerStatusDire": towerStatusDire,
                                           "startTime": startTime,"skill": skill, "radiantWin": radiantWin, "radiantScore": radiantScore, "positiveVotes": positiveVotes,
                                           "negativeVotes": negativeVotes, "matchSeqNum": matchSeqNum, "lobbyType": lobbyType, "leagueid": leagueid, "humanPlayers": humanPlayers, "gameMode": gameMode, "firstBloodTime": firstBloodTime, "engine": engine, "duration": duration,
-                                          "direScore": direScore, "cluster": cluster, "barracksStatusRadiant": barracksStatusRadiant, "barracksStatusDire": barracksStatusDire, "matchID": matchID, "playerId": playerId, "chat": chat?.map{c in c.toDB() }, "radiantGoldAdv": radiantGoldAdv, "radiantXPAdv": radiantXPAdv
+                                          "direScore": direScore, "cluster": cluster, "barracksStatusRadiant": barracksStatusRadiant, "barracksStatusDire": barracksStatusDire, "matchID": matchID, "playerId": playerId ?? "", "chat": chat?.map{c in c.toDB() }, "radiantGoldAdv": radiantGoldAdv, "radiantXPAdv": radiantXPAdv
         ])
         
         return data

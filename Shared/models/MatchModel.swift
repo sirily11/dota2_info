@@ -77,7 +77,7 @@ class MatchModel : ObservableObject{
     /**
      Get match data. If match exist in DB, then return the data from DB, otherwise, use network result
      */
-    func findMatchDetailsById(_ matchId: Int, playerID: String?, forceFetch: Bool = false ,completion: @escaping (MatchDetails) -> Void ){
+    func findMatchDetailsById(_ matchId: String, playerID: String?, forceFetch: Bool = false ,completion: @escaping (MatchDetails) -> Void ){
         let history = loadMatchFromDB(matchId: matchId)
         if let history = history{
             if !forceFetch{
@@ -90,7 +90,7 @@ class MatchModel : ObservableObject{
             result in
             
             if let match = result.value{
-                self.storeMatchIntoDB(match: match)
+                self.storeMatchIntoDB(match: match, player: playerID)
                 completion(match)
             } else{
                 print("Error")
@@ -118,45 +118,50 @@ class MatchModel : ObservableObject{
     /**
      Get list of match summary user played recently
      */
-    func findMatchByPlayer(playerId: String){
+    func findMatchByPlayer(playerId: String?){
         withAnimation{
             isLoadingMatches = true
             selectedPlayer = playerId
         }
         loadMatchesFromDB(playerId: playerId)
-        findMatchByPlayerUtil(playerId: playerId, completion: {
-            [weak self] matches in
-            let tmp = matches.filter{
-                match in
-                let contained = self?.matches.contains{
-                    m in
-                    m.id == match.id
+        if let playerId = playerId{
+            findMatchByPlayerUtil(playerId: playerId, completion: {
+                [weak self] matches in
+                let tmp = matches.filter{
+                    match in
+                    let contained = self?.matches.contains{
+                        m in
+                        m.id == match.id
+                    }
+                    
+                    return !(contained ?? false)
                 }
                 
-                return !(contained ?? false)
+                tmp.forEach{
+                    m in
+                    self?.matches.append(m)
+                }
+                
+                if tmp.count > 0{
+                    self?.matches = self?.matches.sorted(by: { (prev, curr) -> Bool in
+                        prev.startTime ?? 0 > curr.startTime ?? 0
+                    }) ?? []
+                }
+                
+                withAnimation{
+                    self?.isLoadingMatches = false
+                }
+                
+            }) { [weak self] (error) in
+                print(error)
+                withAnimation{
+                    self?.isLoadingMatches = false
+                }
             }
-            
-            tmp.forEach{
-                m in
-                self?.matches.append(m)
-            }
-            
-            if tmp.count > 0{
-                self?.matches = self?.matches.sorted(by: { (prev, curr) -> Bool in
-                    prev.startTime ?? 0 > curr.startTime ?? 0
-                }) ?? []
-            }
-            
-            withAnimation{
-                self?.isLoadingMatches = false
-            }
-            
-        }) { [weak self] (error) in
-            print(error)
-            withAnimation{
-                self?.isLoadingMatches = false
-            }
+        } else{
+            isLoadingMatches = false
         }
+      
     }
     
     /**
@@ -235,33 +240,37 @@ extension MatchModel{
     /**
      Add Match to DB. If exists, then update it
      */
-    func storeMatchIntoDB(match: MatchDetails){
+    func storeMatchIntoDB(match: MatchDetails, player: String?){
         do{
             try realm?.write{
                 let storedMatch = realm?.objects(MatchDetailsDB.self).filter("matchID = \(String(match.matchID ?? 0))").first
-                if let playerId = selectedPlayer{
                     if let storedMatch = storedMatch{
                         realm?.delete(storedMatch)
-                        realm?.add(match.toDB(playerId: playerId))
-                      
-                        
+                        realm?.add(match.toDB(playerId: player))
+
                     } else{
                         
-                        let matchDB = match.toDB(playerId: playerId)
+                        let matchDB = match.toDB(playerId: player)
                         if matchDB.matchID.value == nil{
                             print("Error!")
                         } else{
                             realm?.add(matchDB)
                         }
-                       
-                        
+
                         let index = matches.firstIndex{ m in m.id == match.matchID }
-                        var newMatch = match.toAbstractMatch(playerID: playerId)
+                        var newMatch = match.toAbstractMatch(playerID: player)
                         newMatch.inDB = true
-                        matches[index!] = newMatch
+                        
+                        if let index = index{
+                          
+                            matches[index] = newMatch
+                        } else{
+                            matches.append(newMatch)
+                        }
+                        
                     }
                 }
-            }
+            
         } catch{
             print("Cannot add match to DB")
         }
@@ -270,15 +279,23 @@ extension MatchModel{
     /**
      Load matches from database
      */
-    func loadMatchesFromDB(playerId: String){
-        let results = realm?.objects(MatchDetailsDB.self).filter("playerId = '\(playerId)'").sorted(byKeyPath: "startTime", ascending: false)
-        if let results = results{
-            let histories: [DotaMatchElement] = results.map{ r in MatchDetails(from: r).toAbstractMatch(playerID: playerId) }
-            matches = histories
+    func loadMatchesFromDB(playerId: String?){
+        if let playerId = playerId{
+            let results = realm?.objects(MatchDetailsDB.self).filter("playerId = '\(playerId)'").sorted(byKeyPath: "startTime", ascending: false)
+            if let results = results{
+                let histories: [DotaMatchElement] = results.map{ r in MatchDetails(from: r).toAbstractMatch(playerID: playerId) }
+                matches = histories
+            }
+        } else{
+            let results = realm?.objects(MatchDetailsDB.self).filter("playerId = ''").sorted(byKeyPath: "startTime", ascending: false)
+            if let results = results{
+                let histories: [DotaMatchElement] = results.map{ r in MatchDetails(from: r).toAbstractMatch(playerID: playerId) }
+                matches = histories
+            }
         }
     }
     
-    func loadMatchFromDB(matchId: Int) -> MatchDetails?{
+    func loadMatchFromDB(matchId: String) -> MatchDetails?{
         let result = realm?.objects(MatchDetailsDB.self).filter("matchID = \(matchId)").first
         if let result = result{
             return MatchDetails(from: result)

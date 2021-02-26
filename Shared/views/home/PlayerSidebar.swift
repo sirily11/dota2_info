@@ -22,7 +22,11 @@ struct PlayerSidebar: View {
     
     var body: some View {
         List{
-            Text("Players")
+            NavigationLink(
+                destination: MatchHistory(playerId: nil),
+                label: {
+                    Text("Viewed Matches")
+                })
             ForEach(players){
              player in
                 PlayerRow(player: player)

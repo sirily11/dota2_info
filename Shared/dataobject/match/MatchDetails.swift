@@ -224,7 +224,7 @@ struct PermanentBuff: Codable {
 
 
 extension MatchDetails{
-    func toAbstractMatch(playerID: String) -> DotaMatchElement{
+    func toAbstractMatch(playerID: String?) -> DotaMatchElement{
         var foundPlayer = 0
         var foundHero = 0
         var foundKills = 0
