@@ -14,6 +14,7 @@ class ChatDB: Object{
     @objc dynamic var key: String? = ""
     let slot = RealmOptional<Int>()
     let playerSlot = RealmOptional<Int>()
+    @objc dynamic var unit: String? = ""
 }
 
 class MatchDetailsDB: Object {

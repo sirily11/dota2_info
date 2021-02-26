@@ -39,6 +39,7 @@ class MatchModel : ObservableObject{
     //    var token: NotificationToken?
     
     init() {
+        print("File URL: \(Realm.Configuration.defaultConfiguration.fileURL!)")
         let config = Realm.Configuration(schemaVersion: 3)
         Realm.Configuration.defaultConfiguration = config
         self.realm = try! Realm()
@@ -240,7 +241,9 @@ extension MatchModel{
                 let storedMatch = realm?.objects(MatchDetailsDB.self).filter("matchID = \(String(match.matchID ?? 0))").first
                 if let playerId = selectedPlayer{
                     if let storedMatch = storedMatch{
-                        storedMatch.replayURL = match.replayURL
+                        realm?.delete(storedMatch)
+                        realm?.add(match.toDB(playerId: playerId))
+                      
                         
                     } else{
                         

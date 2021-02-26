@@ -61,7 +61,6 @@
 		25040B6025DE97FB0015AA0C /* HeroAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25040B5E25DE97FB0015AA0C /* HeroAbility.swift */; };
 		250F6F6025E784610038B3CF /* matchenums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F6F5F25E784610038B3CF /* matchenums.swift */; };
 		250F6F6125E784610038B3CF /* matchenums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F6F5F25E784610038B3CF /* matchenums.swift */; };
-		250F6F6825E8F4540038B3CF /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 250F6F6725E8F4540038B3CF /* SwiftUICharts */; };
 		250F6F7025E8F4A40038B3CF /* extension+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F6F6F25E8F4A40038B3CF /* extension+Encodable.swift */; };
 		250F6F7625E8F4BA0038B3CF /* extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F6F7525E8F4BA0038B3CF /* extension+String.swift */; };
 		250F6F7B25E8F4E60038B3CF /* extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250F6F7525E8F4BA0038B3CF /* extension+String.swift */; };
@@ -105,6 +104,8 @@
 		259BF7D325E8F66F0079403F /* demoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF7CD25E8F6690079403F /* demoData.swift */; };
 		259BF7DA25E8F8220079403F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 259BF7D925E8F8220079403F /* Alamofire */; };
 		259BF7E025E8F9C70079403F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 259BF7DF25E8F9C70079403F /* Alamofire */; };
+		259BF7EE25E93C420079403F /* ChartPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF7ED25E93C420079403F /* ChartPage.swift */; };
+		259BF7F325E93EC40079403F /* ChartPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BF7ED25E93C420079403F /* ChartPage.swift */; };
 		25BE0F2E25DD5D0D005B5664 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE0F2D25DD5D0D005B5664 /* Tests_iOS.swift */; };
 		25BE0F3925DD5D0D005B5664 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE0F3825DD5D0D005B5664 /* Tests_macOS.swift */; };
 		25BE0F3D25DD5D0D005B5664 /* dota2_infoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BE0F1125DD5D0C005B5664 /* dota2_infoApp.swift */; };
@@ -133,6 +134,14 @@
 		25CAD91325E29C9F0098A17B /* HistoryTablePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */; };
 		25CAD91925E2EAE50098A17B /* PlayerNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91825E2EAE50098A17B /* PlayerNameView.swift */; };
 		25CAD91A25E2EAE50098A17B /* PlayerNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CAD91825E2EAE50098A17B /* PlayerNameView.swift */; };
+		25D3BCD525E94845004AD7CE /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 25D3BCD425E94845004AD7CE /* Charts */; };
+		25D3BCDB25E94AD9004AD7CE /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 25D3BCDA25E94AD9004AD7CE /* Charts */; };
+		25D3BCE225E94E49004AD7CE /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 25D3BCE125E94E49004AD7CE /* SwiftUICharts */; };
+		25D3BCE825E94E54004AD7CE /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 25D3BCE725E94E54004AD7CE /* SwiftUICharts */; };
+		25D3BCEE25E954BB004AD7CE /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCED25E954BB004AD7CE /* ChatList.swift */; };
+		25D3BCEF25E954BB004AD7CE /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCED25E954BB004AD7CE /* ChatList.swift */; };
+		25D3BCF525E9584E004AD7CE /* extension+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCF425E9584E004AD7CE /* extension+Int.swift */; };
+		25D3BCF625E9584E004AD7CE /* extension+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCF425E9584E004AD7CE /* extension+Int.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +207,7 @@
 		257F807A25DE2B1A0087D339 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		257F808225DE2C9D0087D339 /* heroes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heroes.json; sourceTree = "<group>"; };
 		259BF7CD25E8F6690079403F /* demoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demoData.swift; sourceTree = "<group>"; };
+		259BF7ED25E93C420079403F /* ChartPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPage.swift; sourceTree = "<group>"; };
 		25BE0F1125DD5D0C005B5664 /* dota2_infoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dota2_infoApp.swift; sourceTree = "<group>"; };
 		25BE0F1225DD5D0C005B5664 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		25BE0F1325DD5D0C005B5664 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -223,6 +233,8 @@
 		25CAD90125E290BD0098A17B /* DataGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataGridView.swift; sourceTree = "<group>"; };
 		25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTablePage.swift; sourceTree = "<group>"; };
 		25CAD91825E2EAE50098A17B /* PlayerNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNameView.swift; sourceTree = "<group>"; };
+		25D3BCED25E954BB004AD7CE /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
+		25D3BCF425E9584E004AD7CE /* extension+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+Int.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,11 +243,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2579938425DF821700DF6453 /* RealmSwift in Frameworks */,
+				25D3BCE225E94E49004AD7CE /* SwiftUICharts in Frameworks */,
+				25D3BCD525E94845004AD7CE /* Charts in Frameworks */,
 				25040AA525DE3C150015AA0C /* SwiftDate in Frameworks */,
 				2579938625DF821700DF6453 /* Realm in Frameworks */,
 				259BF7DA25E8F8220079403F /* Alamofire in Frameworks */,
 				257F803E25DD8C050087D339 /* Kingfisher in Frameworks */,
-				250F6F6825E8F4540038B3CF /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,8 +258,10 @@
 			files = (
 				2527B22D25E56FE4002C5A32 /* SDWebImageSwiftUI in Frameworks */,
 				257993D925DFE8AE00DF6453 /* UserNotifications.framework in Frameworks */,
+				25D3BCDB25E94AD9004AD7CE /* Charts in Frameworks */,
 				2579938C25DF824E00DF6453 /* RealmSwift in Frameworks */,
 				259BF7E025E8F9C70079403F /* Alamofire in Frameworks */,
+				25D3BCE825E94E54004AD7CE /* SwiftUICharts in Frameworks */,
 				25040AAB25DE3CED0015AA0C /* SwiftDate in Frameworks */,
 				257F804525DD8F070087D339 /* Kingfisher in Frameworks */,
 			);
@@ -272,7 +287,7 @@
 		25040AB725DE4CA40015AA0C /* detailMatch */ = {
 			isa = PBXGroup;
 			children = (
-				25CAD8F025E28E2D0098A17B /* dataGrid */,
+				259BF7EB25E93C280079403F /* pages */,
 				25040ACD25DE56B00015AA0C /* components */,
 				25040AB825DE4CB80015AA0C /* MatchDetailView.swift */,
 				25040ABF25DE4CCD0015AA0C /* MatchDetailPage.swift */,
@@ -348,6 +363,7 @@
 				250F6F6F25E8F4A40038B3CF /* extension+Encodable.swift */,
 				250F6F7525E8F4BA0038B3CF /* extension+String.swift */,
 				250F6F8925E8F5670038B3CF /* extension+NSDict.swift */,
+				25D3BCF425E9584E004AD7CE /* extension+Int.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -413,9 +429,43 @@
 			path = resources;
 			sourceTree = "<group>";
 		};
+		259BF7E525E91F080079403F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				259BF7E625E91F130079403F /* models */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		259BF7E625E91F130079403F /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		259BF7EB25E93C280079403F /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				259BF7EC25E93C330079403F /* chart */,
+				25CAD8F025E28E2D0098A17B /* dataGrid */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		259BF7EC25E93C330079403F /* chart */ = {
+			isa = PBXGroup;
+			children = (
+				259BF7ED25E93C420079403F /* ChartPage.swift */,
+				25D3BCED25E954BB004AD7CE /* ChatList.swift */,
+			);
+			path = chart;
+			sourceTree = "<group>";
+		};
 		25BE0F0925DD5D0C005B5664 = {
 			isa = PBXGroup;
 			children = (
+				259BF7E525E91F080079403F /* Tests */,
 				25BE0F5725DD5D26005B5664 /* dota2_info.entitlements */,
 				25BE0F0E25DD5D0C005B5664 /* Shared */,
 				25BE0F1B25DD5D0D005B5664 /* iOS */,
@@ -565,8 +615,9 @@
 				25040AA425DE3C150015AA0C /* SwiftDate */,
 				2579938325DF821700DF6453 /* RealmSwift */,
 				2579938525DF821700DF6453 /* Realm */,
-				250F6F6725E8F4540038B3CF /* SwiftUICharts */,
 				259BF7D925E8F8220079403F /* Alamofire */,
+				25D3BCD425E94845004AD7CE /* Charts */,
+				25D3BCE125E94E49004AD7CE /* SwiftUICharts */,
 			);
 			productName = "dota2_info (iOS)";
 			productReference = 25BE0F1925DD5D0D005B5664 /* dota2_info.app */;
@@ -591,6 +642,8 @@
 				2579938B25DF824E00DF6453 /* RealmSwift */,
 				2527B22C25E56FE4002C5A32 /* SDWebImageSwiftUI */,
 				259BF7DF25E8F9C70079403F /* Alamofire */,
+				25D3BCDA25E94AD9004AD7CE /* Charts */,
+				25D3BCE725E94E54004AD7CE /* SwiftUICharts */,
 			);
 			productName = "dota2_info (macOS)";
 			productReference = 25BE0F2125DD5D0D005B5664 /* dota2_info.app */;
@@ -671,8 +724,9 @@
 				25040AA325DE3C150015AA0C /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				2579938225DF821700DF6453 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				2527B22B25E56FE4002C5A32 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				250F6F6625E8F4540038B3CF /* XCRemoteSwiftPackageReference "ChartView" */,
 				259BF7D825E8F8220079403F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				25D3BCD325E94845004AD7CE /* XCRemoteSwiftPackageReference "swiftui-charts" */,
+				25D3BCE025E94E49004AD7CE /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 25BE0F1A25DD5D0D005B5664 /* Products */;
 			projectDirPath = "";
@@ -749,6 +803,7 @@
 				25040AB125DE46C20015AA0C /* MatchDetails.swift in Sources */,
 				25BE0F3D25DD5D0D005B5664 /* dota2_infoApp.swift in Sources */,
 				257F806625DE24690087D339 /* MatchModel.swift in Sources */,
+				259BF7EE25E93C420079403F /* ChartPage.swift in Sources */,
 				25BE0F4125DD5D0D005B5664 /* Persistence.swift in Sources */,
 				25040B4825DE96CE0015AA0C /* Item.swift in Sources */,
 				250F6F7625E8F4BA0038B3CF /* extension+String.swift in Sources */,
@@ -772,6 +827,7 @@
 				25BE0F3F25DD5D0D005B5664 /* ContentView.swift in Sources */,
 				25BE0F6325DD7945005B5664 /* PlayerSidebar.swift in Sources */,
 				257F806D25DE24980087D339 /* Match.swift in Sources */,
+				25D3BCEE25E954BB004AD7CE /* ChatList.swift in Sources */,
 				257993C725DF996000DF6453 /* MatchDetailsDB.swift in Sources */,
 				25040B0C25DE6FA10015AA0C /* DetailPlayerRow.swift in Sources */,
 				25BE0F8825DD7FE2005B5664 /* NewPlayerDialogDetails.swift in Sources */,
@@ -782,6 +838,7 @@
 				25040AEB25DE5A660015AA0C /* GameMode.swift in Sources */,
 				25040B5F25DE97FB0015AA0C /* HeroAbility.swift in Sources */,
 				25040AB925DE4CB80015AA0C /* MatchDetailView.swift in Sources */,
+				25D3BCF525E9584E004AD7CE /* extension+Int.swift in Sources */,
 				25CAD91925E2EAE50098A17B /* PlayerNameView.swift in Sources */,
 				25CAD90225E290BD0098A17B /* DataGridView.swift in Sources */,
 				25BE0F7D25DD7C15005B5664 /* NewPlayerDialog.swift in Sources */,
@@ -800,6 +857,7 @@
 				25040AB225DE46C20015AA0C /* MatchDetails.swift in Sources */,
 				25BE0F3E25DD5D0D005B5664 /* dota2_infoApp.swift in Sources */,
 				257F806725DE24690087D339 /* MatchModel.swift in Sources */,
+				259BF7F325E93EC40079403F /* ChartPage.swift in Sources */,
 				25BE0F4225DD5D0D005B5664 /* Persistence.swift in Sources */,
 				25040B4925DE96CE0015AA0C /* Item.swift in Sources */,
 				257F807525DE283D0087D339 /* MatchHistoryRow.swift in Sources */,
@@ -823,6 +881,7 @@
 				25BE0F6825DD79C4005B5664 /* PlayerSidebar.swift in Sources */,
 				257F806E25DE24980087D339 /* Match.swift in Sources */,
 				257993C825DF996000DF6453 /* MatchDetailsDB.swift in Sources */,
+				25D3BCEF25E954BB004AD7CE /* ChatList.swift in Sources */,
 				25040B0D25DE6FA10015AA0C /* DetailPlayerRow.swift in Sources */,
 				25BE0F9825DD811B005B5664 /* NewPlayerDialogDetails.swift in Sources */,
 				25040B1425DE89E60015AA0C /* HeroModel.swift in Sources */,
@@ -833,6 +892,7 @@
 				25040AEC25DE5A660015AA0C /* GameMode.swift in Sources */,
 				25040B6025DE97FB0015AA0C /* HeroAbility.swift in Sources */,
 				25040ABA25DE4CB80015AA0C /* MatchDetailView.swift in Sources */,
+				25D3BCF625E9584E004AD7CE /* extension+Int.swift in Sources */,
 				25CAD91A25E2EAE50098A17B /* PlayerNameView.swift in Sources */,
 				25BE0F8225DD7C26005B5664 /* NewPlayerDialog.swift in Sources */,
 				25CAD90325E290BD0098A17B /* DataGridView.swift in Sources */,
@@ -1052,7 +1112,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "sirilee.dota2-info-mac";
 				PRODUCT_NAME = dota2_info;
 				SDKROOT = macosx;
@@ -1076,7 +1136,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "sirilee.dota2-info-mac";
 				PRODUCT_NAME = dota2_info;
 				SDKROOT = macosx;
@@ -1232,14 +1292,6 @@
 				minimumVersion = 6.3.1;
 			};
 		};
-		250F6F6625E8F4540038B3CF /* XCRemoteSwiftPackageReference "ChartView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.4;
-			};
-		};
 		2527B22B25E56FE4002C5A32 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -1272,6 +1324,22 @@
 				minimumVersion = 5.4.1;
 			};
 		};
+		25D3BCD325E94845004AD7CE /* XCRemoteSwiftPackageReference "swiftui-charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spacenation/swiftui-charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		25D3BCE025E94E49004AD7CE /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willtemperley/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1284,11 +1352,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 25040AA325DE3C150015AA0C /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
-		};
-		250F6F6725E8F4540038B3CF /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 250F6F6625E8F4540038B3CF /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
 		};
 		2527B22C25E56FE4002C5A32 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1329,6 +1392,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 259BF7D825E8F8220079403F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		25D3BCD425E94845004AD7CE /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25D3BCD325E94845004AD7CE /* XCRemoteSwiftPackageReference "swiftui-charts" */;
+			productName = Charts;
+		};
+		25D3BCDA25E94AD9004AD7CE /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25D3BCD325E94845004AD7CE /* XCRemoteSwiftPackageReference "swiftui-charts" */;
+			productName = Charts;
+		};
+		25D3BCE125E94E49004AD7CE /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25D3BCE025E94E49004AD7CE /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+		25D3BCE725E94E54004AD7CE /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25D3BCE025E94E49004AD7CE /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 

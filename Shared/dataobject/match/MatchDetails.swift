@@ -57,11 +57,11 @@ struct MatchDetails: Codable {
 // MARK - Chat
 struct Chat: Codable {
     let time: Int?
-    let type, key: String?
+    let type, key, unit: String?
     let slot, playerSlot: Int?
 
     enum CodingKeys: String, CodingKey {
-        case time, type, key, slot
+        case time, type, key, slot, unit
         case playerSlot = "player_slot"
     }
 }

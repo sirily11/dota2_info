@@ -18,12 +18,13 @@ extension Chat{
         key = db.key
         time = db.time.value
         slot = db.slot.value
+        unit = db.unit
         playerSlot = db.playerSlot.value
     }
     
     func toDB() -> ChatDB{
         let data = self.dict
-        return ChatDB(value: data ?? [])
+        return ChatDB(value: ["type": type, "key": key, "time": time, "slot": slot, "playerSlot": playerSlot, "unit": unit])
     }
 }
 
@@ -34,7 +35,7 @@ extension PurchaseLog{
     }
     
     func toDB() -> PurchaseLogDB{
-        return PurchaseLogDB(value: self.dict ?? [])
+        return PurchaseLogDB(value: ["time": time, "key": key])
     }
 }
 
@@ -108,11 +109,11 @@ extension PlayerMatch{
         kda = db.kda.value
         abandons = db.abandons.value
         rankTier = db.rankTier.value
-        
+        // v3 property
         abilityTargets = db.abilityTargets?.dictionaryValue() as? [String: [String: Int]]
-    
+        
         abilityUses = db.abilityUses?.dictionaryValue() as? [String: Int ]
-
+        
         damageTargets = db.damageTargets?.dictionaryValue() as? [String: [String: Double]]
         
         killedBy = db.killedBy?.dictionaryValue() as? [String: Int]
@@ -131,7 +132,20 @@ extension PlayerMatch{
     
     
     func toDB() -> MatchPlayerDB{
-        return MatchPlayerDB(value: self.dict ?? [])
+        
+        let data = MatchPlayerDB(value: ["rankTier": rankTier, "abandons": abandons, "kda": kda, "totalXP": totalXP,
+                                         "totalGold": totalGold, "lose": lose, "win": win, "isRadiant": isRadiant,
+                                         "region": region, "patch": patch, "isContributor": isContributor, "gameMode": gameMode,
+                                         "lobbyType": lobbyType, "cluster": cluster, "duration": duration, "startTime": startTime,
+                                         "radiantWin": radiantWin, "personaname": personaname, "xpPerMin": xpPerMin, "towerDamage": towerDamage,
+                                         "partySize": partySize, "partyID": partyID, "netWorth": netWorth, "level": level, "leaverStatus": leaverStatus,
+                                         "lastHits": lastHits, "kills": kills, "itemNeutral": itemNeutral, "item5": item5, "item4": item4, "item3": item3,
+                                         "item2": item2, "item1": item1, "item0": item0, "heroID": heroID, "heroHealing": heroHealing, "heroDamage": heroDamage,
+                                         "goldSpent": goldSpent, "goldPerMin": goldPerMin, "gold": gold, "denies": denies, "deaths":deaths,"backpack3": backpack3,
+                                         "backpack2": backpack2, "backpack1": backpack1, "backpack0": backpack0,"permanentBuffs": permanentBuffs?.map{ p in p.toDB()},
+                                         "assists": assists, "accountID": accountID, "abilityUpgradesArr": abilityUpgradesArr, "playerSlot": playerSlot,
+                                         "matchID": matchID, "abilityTargets":  toJSONString(dic: abilityTargets), "abilityUses": toJSONString(dic: abilityUses), "damageTargets": toJSONString(dic: damageTargets), "killedBy": toJSONString(dic: killedBy), "itemUsage":toJSONString(dic: itemUsage), "goldT": goldT, "lhT": lhT, "xpT": xpT, "purchaseLog": purchaseLog?.map{p in p.toDB()}, "times": times, "teamfightParticipation": teamfightParticipation])
+        return data
     }
 }
 
@@ -213,6 +227,13 @@ extension MatchDetails{
     }
     
     func toDB(playerId: String) -> MatchDetailsDB{
-        return MatchDetailsDB(value: self.dict ?? [])
+        let data = MatchDetailsDB(value: ["replayURL": replayURL, "region": region, "patch": patch, "players": players?.map{p in p.toDB() }, "seriesType": seriesType,
+                                          "seriesID": seriesID, "replaySalt": replaySalt, "towerStatusRadiant": towerStatusRadiant, "towerStatusDire": towerStatusDire,
+                                          "startTime": startTime,"skill": skill, "radiantWin": radiantWin, "radiantScore": radiantScore, "positiveVotes": positiveVotes,
+                                          "negativeVotes": negativeVotes, "matchSeqNum": matchSeqNum, "lobbyType": lobbyType, "leagueid": leagueid, "humanPlayers": humanPlayers, "gameMode": gameMode, "firstBloodTime": firstBloodTime, "engine": engine, "duration": duration,
+                                          "direScore": direScore, "cluster": cluster, "barracksStatusRadiant": barracksStatusRadiant, "barracksStatusDire": barracksStatusDire, "matchID": matchID, "playerId": playerId, "chat": chat?.map{c in c.toDB() }, "radiantGoldAdv": radiantGoldAdv, "radiantXPAdv": radiantXPAdv
+        ])
+        
+        return data
     }
 }

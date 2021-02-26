@@ -12,9 +12,7 @@ struct InfoCard: View {
     @EnvironmentObject var matchModel: MatchModel
     var match: MatchDetails
     
-    private func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
-      return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-    }
+
     
     private func winText(_ win: Bool) -> AnyView{
         if win {
@@ -35,8 +33,10 @@ struct InfoCard: View {
     }
     
     var body: some View {
-        let (hr, min, secs) = secondsToHoursMinutesSeconds(seconds: match.duration ?? 0)
-        let (fhr, fmin, fsec) = secondsToHoursMinutesSeconds(seconds: match.firstBloodTime ?? 0)
+        let (hr, min, secs) = (match.duration ?? 0).secondsToHoursMinutesSeconds()
+        
+        let (fhr, fmin, fsec) =  (match.firstBloodTime ?? 0).secondsToHoursMinutesSeconds()
+        
         let time = match.startTime?.dateFromMilliseconds().convertTo(region: Region(calendar: Calendars.gregorian, zone: Zones.asiaShanghai, locale: Locales.english)).toFormat("dd MMM yyyy HH:mm:ss")
         
         let gameMode = matchModel.getGameModeById(String(match.gameMode ?? 0))

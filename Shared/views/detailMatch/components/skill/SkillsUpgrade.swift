@@ -42,20 +42,22 @@ struct SkillsImage: View {
                 WebImage(url: URL(string: img.getAssetURL())!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .onTapGesture {
-                        showDetail = true
-                    }
-                    .popover(isPresented: $showDetail, content: {
-                        SkillsDetail(skill: skill!)
-                            .padding()
-                            .frame(width: 300)
-                    })
+
             
                 
             } else{
-                EmptyView()
+                Text("\(skill?.dname ?? "")")
+                    .lineLimit(2)
             }
         }
+        .onTapGesture {
+            showDetail = true
+        }
+        .popover(isPresented: $showDetail, content: {
+            SkillsDetail(skill: skill!)
+                .padding()
+                .frame(width: 300)
+        })
     
     }
 }

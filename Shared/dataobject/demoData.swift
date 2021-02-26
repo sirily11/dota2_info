@@ -9,8 +9,8 @@ import Foundation
 
 
 let demoChats = [
-    Chat(time: 164, type: ChatEnum.chat.rawValue, key: "Hello World", slot: 5, playerSlot: 1),
-    Chat(time: 200, type: ChatEnum.chat.rawValue, key: "Hello World", slot: 5, playerSlot: 1)
+    Chat(time: 164, type: ChatEnum.chat.rawValue, key: "Hello World", unit: "Bard", slot: 5, playerSlot: 1),
+    Chat(time: 200, type: ChatEnum.chat.rawValue, key: "Hello World", unit: "Bard", slot: 5, playerSlot: 1)
 ]
 
 let demoAbilityTargets = ["pugna_decrepify": ["npc_dota_hero_windrunner": 8], "pugna_life_drain": ["npc_dota_hero_windrunner": 8]]
