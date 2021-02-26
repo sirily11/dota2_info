@@ -147,6 +147,18 @@ extension PlayerMatch{
                                          "matchID": matchID, "abilityTargets":  toJSONString(dic: abilityTargets), "abilityUses": toJSONString(dic: abilityUses), "damageTargets": toJSONString(dic: damageTargets), "killedBy": toJSONString(dic: killedBy), "itemUsage":toJSONString(dic: itemUsage), "goldT": goldT, "lhT": lhT, "xpT": xpT, "purchaseLog": purchaseLog?.map{p in p.toDB()}, "times": times, "teamfightParticipation": teamfightParticipation])
         return data
     }
+    
+    var color: Color{
+        get {
+            if playerSlot ?? 0 < 128{
+                return Color.green
+            }
+            
+            return Color.red
+        }
+    }
+    
+    
 }
 
 extension MatchDetails{

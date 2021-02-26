@@ -142,6 +142,12 @@
 		25D3BCEF25E954BB004AD7CE /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCED25E954BB004AD7CE /* ChatList.swift */; };
 		25D3BCF525E9584E004AD7CE /* extension+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCF425E9584E004AD7CE /* extension+Int.swift */; };
 		25D3BCF625E9584E004AD7CE /* extension+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCF425E9584E004AD7CE /* extension+Int.swift */; };
+		25D3BCFE25E9645C004AD7CE /* PurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCFD25E9645C004AD7CE /* PurchaseLogView.swift */; };
+		25D3BCFF25E9645C004AD7CE /* PurchaseLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BCFD25E9645C004AD7CE /* PurchaseLogView.swift */; };
+		25D3BD0925E9685B004AD7CE /* DetailInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BD0825E9685B004AD7CE /* DetailInfoPage.swift */; };
+		25D3BD0A25E9685B004AD7CE /* DetailInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BD0825E9685B004AD7CE /* DetailInfoPage.swift */; };
+		25D3BD1025E9710D004AD7CE /* HeroSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BD0F25E9710D004AD7CE /* HeroSelectionView.swift */; };
+		25D3BD1125E9710D004AD7CE /* HeroSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3BD0F25E9710D004AD7CE /* HeroSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +241,9 @@
 		25CAD91825E2EAE50098A17B /* PlayerNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNameView.swift; sourceTree = "<group>"; };
 		25D3BCED25E954BB004AD7CE /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		25D3BCF425E9584E004AD7CE /* extension+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+Int.swift"; sourceTree = "<group>"; };
+		25D3BCFD25E9645C004AD7CE /* PurchaseLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseLogView.swift; sourceTree = "<group>"; };
+		25D3BD0825E9685B004AD7CE /* DetailInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoPage.swift; sourceTree = "<group>"; };
+		25D3BD0F25E9710D004AD7CE /* HeroSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,6 +456,7 @@
 		259BF7EB25E93C280079403F /* pages */ = {
 			isa = PBXGroup;
 			children = (
+				25D3BCFB25E96449004AD7CE /* details */,
 				259BF7EC25E93C330079403F /* chart */,
 				25CAD8F025E28E2D0098A17B /* dataGrid */,
 			);
@@ -592,6 +602,16 @@
 				25CAD91125E29C9F0098A17B /* HistoryTablePage.swift */,
 			);
 			path = dataGrid;
+			sourceTree = "<group>";
+		};
+		25D3BCFB25E96449004AD7CE /* details */ = {
+			isa = PBXGroup;
+			children = (
+				25D3BCFD25E9645C004AD7CE /* PurchaseLogView.swift */,
+				25D3BD0825E9685B004AD7CE /* DetailInfoPage.swift */,
+				25D3BD0F25E9710D004AD7CE /* HeroSelectionView.swift */,
+			);
+			path = details;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -808,10 +828,12 @@
 				25040B4825DE96CE0015AA0C /* Item.swift in Sources */,
 				250F6F7625E8F4BA0038B3CF /* extension+String.swift in Sources */,
 				250F6F8A25E8F5670038B3CF /* extension+NSDict.swift in Sources */,
+				25D3BCFE25E9645C004AD7CE /* PurchaseLogView.swift in Sources */,
 				257F807425DE283D0087D339 /* MatchHistoryRow.swift in Sources */,
 				25040B5825DE975C0015AA0C /* ItemIds.swift in Sources */,
 				250F6F7025E8F4A40038B3CF /* extension+Encodable.swift in Sources */,
 				255BC8F925DEE66600946641 /* SkillsUpgrade.swift in Sources */,
+				25D3BD0925E9685B004AD7CE /* DetailInfoPage.swift in Sources */,
 				257993CE25DF9D9200DF6453 /* extensions+MatchDetailDB.swift in Sources */,
 				257F807B25DE2B1A0087D339 /* Hero.swift in Sources */,
 				25040B1A25DE8A9B0015AA0C /* MatchHero.swift in Sources */,
@@ -825,6 +847,7 @@
 				25040B3A25DE95C20015AA0C /* Ability.swift in Sources */,
 				25BE0F9F25DD8134005B5664 /* PlayerModel.swift in Sources */,
 				25BE0F3F25DD5D0D005B5664 /* ContentView.swift in Sources */,
+				25D3BD1025E9710D004AD7CE /* HeroSelectionView.swift in Sources */,
 				25BE0F6325DD7945005B5664 /* PlayerSidebar.swift in Sources */,
 				257F806D25DE24980087D339 /* Match.swift in Sources */,
 				25D3BCEE25E954BB004AD7CE /* ChatList.swift in Sources */,
@@ -862,10 +885,12 @@
 				25040B4925DE96CE0015AA0C /* Item.swift in Sources */,
 				257F807525DE283D0087D339 /* MatchHistoryRow.swift in Sources */,
 				250F6F8B25E8F5670038B3CF /* extension+NSDict.swift in Sources */,
+				25D3BCFF25E9645C004AD7CE /* PurchaseLogView.swift in Sources */,
 				250F6F8025E8F4E80038B3CF /* extension+Encodable.swift in Sources */,
 				25040B5925DE975C0015AA0C /* ItemIds.swift in Sources */,
 				25BE0FA825DD8156005B5664 /* PlayerModel.swift in Sources */,
 				257993CF25DF9D9200DF6453 /* extensions+MatchDetailDB.swift in Sources */,
+				25D3BD0A25E9685B004AD7CE /* DetailInfoPage.swift in Sources */,
 				255BC8FA25DEE66600946641 /* SkillsUpgrade.swift in Sources */,
 				257F807C25DE2B1A0087D339 /* Hero.swift in Sources */,
 				25040B1B25DE8A9B0015AA0C /* MatchHero.swift in Sources */,
@@ -879,6 +904,7 @@
 				25040B3B25DE95C20015AA0C /* Ability.swift in Sources */,
 				25BE0F4025DD5D0D005B5664 /* ContentView.swift in Sources */,
 				25BE0F6825DD79C4005B5664 /* PlayerSidebar.swift in Sources */,
+				25D3BD1125E9710D004AD7CE /* HeroSelectionView.swift in Sources */,
 				257F806E25DE24980087D339 /* Match.swift in Sources */,
 				257993C825DF996000DF6453 /* MatchDetailsDB.swift in Sources */,
 				25D3BCEF25E954BB004AD7CE /* ChatList.swift in Sources */,

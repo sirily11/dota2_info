@@ -72,11 +72,15 @@ class HeroModel: ObservableObject{
         return nil
     }
     
-    private func findItemById(itemId: String) -> Item?{
+    func findItemById(itemId: String) -> Item?{
         if let itemName = itemIds[itemId]{
             return items[itemName]
         }
         return nil
+    }
+    
+    func findItemByName(itemName: String) -> Item?{
+        return items[itemName]
     }
     
 }

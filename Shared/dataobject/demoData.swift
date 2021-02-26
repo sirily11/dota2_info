@@ -23,7 +23,7 @@ let demoDamageTargets: [String: [String: Double]] = ["null": ["npc_dota_hero_ear
                                                                                                                                         "npc_dota_hero_windrunner": 4497,] ]
 
 
-let demoPurchaseLogs = [PurchaseLog(time: 100, key: "boots") ]
+let demoPurchaseLogs = [PurchaseLog(time: 100, key: "stormcrafter") ]
 
 
 

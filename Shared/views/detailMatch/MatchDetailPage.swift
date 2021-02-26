@@ -31,10 +31,10 @@ struct MatchDetailPage: View {
                         
                         HistoryTablePage(match: matchData)
                             .tabItem {
-                                Label("Details", systemImage: "magnifyingglass")
+                                Label("Tables", systemImage: "magnifyingglass")
                             }
                         if matchData.isParsed{
-                            Text("Chart")
+                            ChartPage(match: matchData)
                                 .tabItem{
                                     Label("Chart", systemImage: "chart.bar.fill")
                                 }
@@ -44,9 +44,9 @@ struct MatchDetailPage: View {
                                     Label("Damage", systemImage: "chart.bar.fill")
                                 }
                             
-                            Text("Purchase logs")
+                            DetailInfoPage(match: matchData)
                                 .tabItem{
-                                    Label("Purchase logs", systemImage: "chart.bar.fill")
+                                    Label("Details", systemImage: "chart.bar.fill")
                                 }
                         }
                         

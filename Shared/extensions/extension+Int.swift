@@ -7,9 +7,8 @@
 
 import Foundation
 extension Int{
-    func secondsToHoursMinutesSeconds() -> (Int, Int, Int) {
-        
-      return (self / 3600, (self % 3600) / 60, (self % 3600) % 60)
+    func secondsToHoursMinutesSeconds() -> (String, String, String) {
+      return (String(format: "%02d", self / 3600), String(format: "%02d", (self % 3600) / 60), String(format: "%02d",  (self % 3600) % 60))
     }
 
 }

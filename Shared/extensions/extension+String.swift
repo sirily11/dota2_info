@@ -13,7 +13,11 @@ extension String{
         if let data = self.data(using: String.Encoding.utf8) {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String: AnyObject]
-                return json!
+                if let json = json{
+                    return json
+                } else{
+                    return NSDictionary() as! [String : AnyObject]
+                }
                 
             } catch {
                 print("Error converting to JSON")

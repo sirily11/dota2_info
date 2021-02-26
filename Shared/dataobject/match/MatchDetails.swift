@@ -55,7 +55,8 @@ struct MatchDetails: Codable {
 }
 
 // MARK - Chat
-struct Chat: Codable {
+struct Chat: Codable, Identifiable {
+    let id = UUID()
     let time: Int?
     let type, key, unit: String?
     let slot, playerSlot: Int?
@@ -179,7 +180,8 @@ struct PlayerMatch: Codable, Identifiable {
 }
 
 // MARK: - PurchaseLog
-struct PurchaseLog: Codable {
+struct PurchaseLog: Codable, Identifiable {
+    let id = UUID()
     let time: Int?
     let key: String?
 }

@@ -23,13 +23,19 @@ struct ItemGrid: View {
         VStack{
             HStack{
                 ItemCeil(item: items[0])
+                    .frame(width: 40, height: 40, alignment: .center)
                 ItemCeil(item: items[1])
+                    .frame(width: 40, height: 40, alignment: .center)
                 ItemCeil(item: items[2])
+                    .frame(width: 40, height: 40, alignment: .center)
             }
             HStack{
                 ItemCeil(item: items[3])
+                    .frame(width: 40, height: 40, alignment: .center)
                 ItemCeil(item: items[4])
+                    .frame(width: 40, height: 40, alignment: .center)
                 ItemCeil(item: items[5])
+                    .frame(width: 40, height: 40, alignment: .center)
             }
         }
     }
@@ -58,11 +64,9 @@ struct ItemCeil: View {
                 Rectangle()
                     .foregroundColor(.black)
             }
-            
-            
-        
+
         }
-        .frame(width: 40, height: 40, alignment: .center)
+        
     }
 }
 
