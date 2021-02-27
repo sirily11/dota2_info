@@ -40,6 +40,7 @@ struct BuffViewCell: View {
                     }
                     .popover(isPresented: $showDetail, content: {
                         SkillsDetail(skill: skill)
+                            .frame(width: 300)
                     })
                  
                 
@@ -54,6 +55,7 @@ struct BuffViewCell: View {
                     }
                     .popover(isPresented: $showDetail, content: {
                        ItemInfo(item: item)
+                        .frame(width: 300)
                     })
               
                 

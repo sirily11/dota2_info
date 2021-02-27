@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "E37D8A70-E880-45CC-BFAE-24BEFC34F28E"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A58A6DFF-6A2D-4081-8F14-4B885836152F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/views/detailMatch/pages/damage/DamageTable.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F7940D2-9125-47DA-9404-92CD7C35B386"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/models/MatchModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "findMatchDetailsById(_:playerID:forceFetch:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "047137A0-D80A-42E2-889E-22A6222E027F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/models/MatchModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "storeMatchIntoDB(match:player:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "047137A0-D80A-42E2-889E-22A6222E027F - f436e4bb6303fd71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in dota2_info.MatchModel.storeMatchIntoDB(match: dota2_info.MatchDetails, player: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "dota2_info"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqiwei/Desktop/projects/dota2_info/Shared/models/MatchModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "260"
+                  endingLineNumber = "260"
+                  offsetFromSymbolStart = "3870">
+               </Location>
+               <Location
+                  uuid = "047137A0-D80A-42E2-889E-22A6222E027F - 7c2b511bb68e82d4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (dota2_info.DotaMatchElement) -&gt; Swift.Bool in closure #1 () -&gt; () in dota2_info.MatchModel.storeMatchIntoDB(match: dota2_info.MatchDetails, player: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "dota2_info"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liqiwei/Desktop/projects/dota2_info/Shared/models/MatchModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "260"
+                  endingLineNumber = "260"
+                  offsetFromSymbolStart = "43">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
