@@ -73,6 +73,7 @@ class MatchPlayerDB: Object {
     let times = List<Int>()
     let teamfightParticipation = RealmOptional<Double>()
     @objc dynamic var itemUsage: String?
+    let dnT = List<Int>()
     
 }
 

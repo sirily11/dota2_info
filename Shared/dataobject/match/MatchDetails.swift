@@ -119,6 +119,7 @@ struct PlayerMatch: Codable, Identifiable {
     let times: [Int]?
     let teamfightParticipation: Double?
     let itemUsage: [String: Int]?
+    let dnT: [Int]?
     
 
     enum CodingKeys: String, CodingKey {
@@ -162,6 +163,7 @@ struct PlayerMatch: Codable, Identifiable {
         case gameMode = "game_mode"
         case isContributor = "is_contributor"
         case patch, region, isRadiant, win, lose, times
+        case dnT = "dn_t"
         case totalGold = "total_gold"
         case totalXP = "total_xp"
         case kda, abandons
@@ -176,6 +178,7 @@ struct PlayerMatch: Codable, Identifiable {
         case purchaseLog = "purchase_log"
         case teamfightParticipation = "teamfight_participation"
         case itemUsage = "item_usage"
+    
     }
 }
 

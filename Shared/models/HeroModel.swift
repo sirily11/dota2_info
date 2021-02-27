@@ -60,7 +60,7 @@ class HeroModel: ObservableObject{
     }
     
     
-    private func findAbility(abilityName: String) -> Ability?{
+    func findAbility(abilityName: String) -> Ability?{
         return abilities[abilityName]
     }
     

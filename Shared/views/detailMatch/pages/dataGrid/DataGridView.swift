@@ -25,7 +25,7 @@ extension DataGridView{
     }
     
     @ViewBuilder
-    static func buildHeader(dataGrid: DataGrid ) -> some View{
+    static func buildHeader(dataGrid: DataGrid, height: Int=40 ) -> some View{
         let maxWidths: [Int] = dataGrid.columns.enumerated().map{ (index, element) in
             return getMaxRowCellWidth(index: index, dataGrid: dataGrid)
             
@@ -34,7 +34,7 @@ extension DataGridView{
             ForEach(0..<dataGrid.columns.count){ index -> DataCellView in
                 let column = dataGrid.columns[index]
                
-                return DataCellView(view: column.content,height: 40, width: maxWidths[index])
+                return DataCellView(view: column.content,height: height, width: maxWidths[index])
             }
         }
       
@@ -46,6 +46,7 @@ extension DataGridView{
 struct DataGridView: View {
     let dataGrid: DataGrid
     let showHeader: Bool
+    
     
 
 

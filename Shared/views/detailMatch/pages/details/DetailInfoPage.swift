@@ -20,14 +20,25 @@ struct DetailInfoPage: View {
                     }
                     .frame(maxWidth: 120, maxHeight: m.size.height)
                     ScrollView {
-                        VStack(alignment: .leading){
-                            Text("Purchase Logs")
-                                .font(.title2)
-                            
-                            PurchaseLogView(purchaseLogs: selectedPlayer?.purchaseLog ?? [])
-                               
+                        if let selectedPlayer = selectedPlayer{
+                            VStack(alignment: .leading){
+                                Text("Charts")
+                                    .font(.title)
+                                    .padding([.vertical])
+                                Divider()
+                                PlayerChartView(player: selectedPlayer)
+                                
+                                Text("Purchase Logs")
+                                    .font(.title)
+                                    .padding([.vertical])
+                                Divider()
+                                PurchaseLogView(purchaseLogs: selectedPlayer.purchaseLog ?? [])
+                                   
+                            }
                         }
+                     
                     }
+                    .padding()
                 }
             
         }

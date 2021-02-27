@@ -127,7 +127,7 @@ extension PlayerMatch{
         purchaseLog = db.purchaseLog.map{p in PurchaseLog(from: p) }
         times = db.times.map{t in t }
         teamfightParticipation = db.teamfightParticipation.value
-        
+        dnT = db.dnT.map{t in t}
     }
     
     
@@ -144,7 +144,7 @@ extension PlayerMatch{
                                          "goldSpent": goldSpent, "goldPerMin": goldPerMin, "gold": gold, "denies": denies, "deaths":deaths,"backpack3": backpack3,
                                          "backpack2": backpack2, "backpack1": backpack1, "backpack0": backpack0,"permanentBuffs": permanentBuffs?.map{ p in p.toDB()},
                                          "assists": assists, "accountID": accountID, "abilityUpgradesArr": abilityUpgradesArr, "playerSlot": playerSlot,
-                                         "matchID": matchID, "abilityTargets":  toJSONString(dic: abilityTargets), "abilityUses": toJSONString(dic: abilityUses), "damageTargets": toJSONString(dic: damageTargets), "killedBy": toJSONString(dic: killedBy), "itemUsage":toJSONString(dic: itemUsage), "goldT": goldT, "lhT": lhT, "xpT": xpT, "purchaseLog": purchaseLog?.map{p in p.toDB()}, "times": times, "teamfightParticipation": teamfightParticipation])
+                                         "matchID": matchID, "abilityTargets":  toJSONString(dic: abilityTargets), "abilityUses": toJSONString(dic: abilityUses), "damageTargets": toJSONString(dic: damageTargets), "killedBy": toJSONString(dic: killedBy), "itemUsage":toJSONString(dic: itemUsage), "goldT": goldT, "lhT": lhT, "xpT": xpT, "purchaseLog": purchaseLog?.map{p in p.toDB()}, "times": times, "teamfightParticipation": teamfightParticipation, "dnT": dnT])
         return data
     }
     
@@ -236,14 +236,22 @@ extension MatchDetails{
         chat = db.chat.map{ c in Chat(from: c)}
         radiantGoldAdv = db.radiantGoldAdv.map{v in v}
         radiantXPAdv = db.radiantXPAdv.map{ v in v}
+        
     }
     
     func toDB(playerId: String?) -> MatchDetailsDB{
+        let foundPlayer = self.players?.first{
+            p in
+            String(p.accountID ?? 0) == playerId
+        }
+        
+        let playerIdToStore = foundPlayer != nil ? playerId : ""
+        
         let data = MatchDetailsDB(value: ["replayURL": replayURL, "region": region, "patch": patch, "players": players?.map{p in p.toDB() }, "seriesType": seriesType,
                                           "seriesID": seriesID, "replaySalt": replaySalt, "towerStatusRadiant": towerStatusRadiant, "towerStatusDire": towerStatusDire,
                                           "startTime": startTime,"skill": skill, "radiantWin": radiantWin, "radiantScore": radiantScore, "positiveVotes": positiveVotes,
                                           "negativeVotes": negativeVotes, "matchSeqNum": matchSeqNum, "lobbyType": lobbyType, "leagueid": leagueid, "humanPlayers": humanPlayers, "gameMode": gameMode, "firstBloodTime": firstBloodTime, "engine": engine, "duration": duration,
-                                          "direScore": direScore, "cluster": cluster, "barracksStatusRadiant": barracksStatusRadiant, "barracksStatusDire": barracksStatusDire, "matchID": matchID, "playerId": playerId ?? "", "chat": chat?.map{c in c.toDB() }, "radiantGoldAdv": radiantGoldAdv, "radiantXPAdv": radiantXPAdv
+                                          "direScore": direScore, "cluster": cluster, "barracksStatusRadiant": barracksStatusRadiant, "barracksStatusDire": barracksStatusDire, "matchID": matchID, "playerId": playerIdToStore, "chat": chat?.map{c in c.toDB() }, "radiantGoldAdv": radiantGoldAdv, "radiantXPAdv": radiantXPAdv
         ])
         
         return data

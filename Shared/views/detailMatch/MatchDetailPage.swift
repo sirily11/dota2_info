@@ -39,7 +39,7 @@ struct MatchDetailPage: View {
                                     Label("Chart", systemImage: "chart.bar.fill")
                                 }
                             
-                            Text("Damage")
+                            DamagePage(match: matchData)
                                 .tabItem{
                                     Label("Damage", systemImage: "chart.bar.fill")
                                 }

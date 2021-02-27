@@ -40,7 +40,7 @@ class MatchModel : ObservableObject{
     
     init() {
         print("File URL: \(Realm.Configuration.defaultConfiguration.fileURL!)")
-        let config = Realm.Configuration(schemaVersion: 4)
+        let config = Realm.Configuration(schemaVersion: 5)
         Realm.Configuration.defaultConfiguration = config
         self.realm = try! Realm()
     }
@@ -287,7 +287,7 @@ extension MatchModel{
                 matches = histories
             }
         } else{
-            let results = realm?.objects(MatchDetailsDB.self).filter("playerId = ''").sorted(byKeyPath: "startTime", ascending: false)
+            let results = realm?.objects(MatchDetailsDB.self).sorted(byKeyPath: "startTime", ascending: false)
             if let results = results{
                 let histories: [DotaMatchElement] = results.map{ r in MatchDetails(from: r).toAbstractMatch(playerID: playerId) }
                 matches = histories

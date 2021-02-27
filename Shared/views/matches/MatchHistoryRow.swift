@@ -30,12 +30,18 @@ struct MatchHistoryRow: View {
                 Spacer()
                 Text("\(String(match.id ?? 0))")
             }
-       
+            
+            
             HStack{
-                Text("\(matchModel.getHeroById("\(match.heroID!)")?.localizedName ?? "No Found")")
-                    .font(.title3)
-         
-                
+                if let heroId = match.heroID{
+                    if let hero = matchModel.getHeroById("\(heroId)"){
+                        Text("\(hero.localizedName ?? "No Found")")
+                            .font(.title3)
+                        
+                    } else{
+                        Text("天辉")
+                    }
+                }
                 if match.win(){
                     Text("Win")
                         .padding(5)
@@ -50,13 +56,14 @@ struct MatchHistoryRow: View {
                         .padding(10)
                 }
                 
+                
             }
             HStack{
                 if let starttime = match.startTime{
                     Text("\(starttime.dateFromMilliseconds().convertTo(region: Region(calendar: Calendars.gregorian, zone: Zones.asiaShanghai, locale: Locales.english)) .toFormat("dd MMM yyyy HH:mm:ss"))")
                         .bold()
                 }
-               
+                
             }
             HStack{
                 Text("Kills: \(match.kills ?? 0)")

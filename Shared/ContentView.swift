@@ -30,6 +30,7 @@ struct ContentView: View {
     @State var searchedMatch: MatchDetails?
     @State var isLoading = false
     
+    
     var body: some View {
         NavigationView{
             PlayerSidebar()
@@ -64,29 +65,18 @@ struct ContentView: View {
         .toolbar {
             // Search view
             HStack {
-                TextField("Match ID", text: $text, onCommit:  {
-                    if !text.isEmpty{
-                        if searchedMatch == nil{
-                            withAnimation{
-                                isLoading = true
-                            }
-                            matchModel.findMatchDetailsById(text, playerID: matchModel.selectedPlayer){
-                                match in
-                                searchedMatch = match
-                                showSheet = .second
-                                withAnimation{
-                                    isLoading = false
-                                }
-                                
-                            }
-                        }
+                ZStack(alignment: .trailing) {
+                    ZStack {
+                        TextField("Match ID", text: $text)
+                        .font(.system(size: 12.0))
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 280)
                     }
-                })
-                .padding(7)
-                .padding(.horizontal, 25)
-                .cornerRadius(8)
-                .padding(.horizontal, 10)
-                .frame(width: 280)
+                    Button(action: search, label: {
+                        Label("Search", systemImage: "magnifyingglass")
+                    })
+                    
+                }
                 
                 if isLoading{
                     ProgressView()
@@ -125,6 +115,27 @@ struct ContentView: View {
         #endif
     }
     
+}
+
+extension ContentView{
+    func search(){
+        if !text.isEmpty{
+
+            withAnimation{
+                isLoading = true
+            }
+            matchModel.findMatchDetailsById(text, playerID: matchModel.selectedPlayer){
+                match in
+                searchedMatch = match
+                showSheet = .second
+                withAnimation{
+                    isLoading = false
+                }
+
+            }
+
+        }
+    }
 }
 
 private let itemFormatter: DateFormatter = {

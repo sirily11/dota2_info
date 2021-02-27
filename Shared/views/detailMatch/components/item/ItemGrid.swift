@@ -51,7 +51,7 @@ struct ItemCeil: View {
                 if let img = item.img{
                     WebImage(url: URL(string: img.getAssetURL())!)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                         .onTapGesture {
                             showInfo = true
                         }
