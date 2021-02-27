@@ -60,7 +60,7 @@ class MatchPlayerDB: Object {
     let startTime = RealmOptional<Double>(), duration = RealmOptional<Double>(), cluster = RealmOptional<Double>(), lobbyType = RealmOptional<Double>()
     let gameMode = RealmOptional<Int>(), patch = RealmOptional<Int>(), region = RealmOptional<Int>(), win = RealmOptional<Int>(), lose = RealmOptional<Int>(), totalGold = RealmOptional<Int>(), totalXP = RealmOptional<Int>()
     let kda = RealmOptional<Double>(), abandons = RealmOptional<Double>(), rankTier = RealmOptional<Double>()
-    let permanentBuff = List<PermanentBuffDB>()
+    let permanentBuffs = List<PermanentBuffDB>()
     
     @objc dynamic var abilityTargets: String? = ""
     @objc dynamic var abilityUses: String? = ""

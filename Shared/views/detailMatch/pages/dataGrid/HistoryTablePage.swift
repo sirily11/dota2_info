@@ -20,6 +20,8 @@ struct HistoryTablePage: View {
             DataColumn(sortKey: "Hero", content: AnyView(Text("阵营"))),
             DataColumn(sortKey: "PlayerName", content: AnyView(Text("Player Name"))),
             DataColumn(sortKey: "Items", content: AnyView(Text("Items"))),
+            DataColumn(sortKey: "中立道具", content: AnyView(Text("中立道具"))),
+            DataColumn(sortKey: "永久状态", content: AnyView(Text("永久状态"))),
             DataColumn(sortKey: "Level", content: AnyView(Text("Level"))),
             DataColumn(sortKey: "Gold", content: AnyView(Text("Gold"))),
             DataColumn(sortKey: "Gold", content: AnyView(Text("Gold Remaining"))),
@@ -75,6 +77,8 @@ extension HistoryTablePage{
             let hero: MatchHero? = heroModel.findHeroById(String(player.heroID!), with: [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.backpack0, player.backpack1, player.backpack2, ])
             
             let percentage = index < 5 ? ((player.heroDamage ?? 1) / totalDmg1) :  ((player.heroDamage ?? 1) / totalDmg2)
+        
+            let itemNeutral = heroModel.findItemById(itemId: String(player.itemNeutral ?? 0))
             
             return DataRow(sortKey: "",
                            cells: [
@@ -82,6 +86,8 @@ extension HistoryTablePage{
                             DataRowCell(content:  AnyView(Text(index < 5 ? "天辉" : "夜魇"))),
                             DataRowCell(content:  AnyView(PlayerNameView(player: player, normalFont: true))),
                             DataRowCell(content:  AnyView(ItemGrid(items: hero?.items ?? [])), width: 200),
+                            DataRowCell(content:  AnyView(ItemCeil(item: itemNeutral))),
+                            DataRowCell(content:  AnyView(BuffView(buff: player.permanentBuffs ?? [])), width: 200),
                             DataRowCell(content:  AnyView(Text(String(player.level ?? 0)))),
                             DataRowCell(content:  AnyView(Text(String(player.netWorth ?? 0)))),
                             DataRowCell(content:  AnyView(Text(String(player.gold ?? 0)))),

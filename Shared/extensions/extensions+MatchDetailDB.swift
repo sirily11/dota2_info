@@ -48,7 +48,7 @@ extension PermanentBuff{
     
     func toDB() -> PermanentBuffDB{
         
-        return PermanentBuffDB(value: self.dict ?? [])
+        return PermanentBuffDB(value: ["permanentBuff": permanentBuff, "stackCount": stackCount])
     }
 }
 
@@ -61,7 +61,7 @@ extension PlayerMatch{
         abilityUpgradesArr = db.abilityUpgradesArr.map{ a in a }
         accountID = db.accountID.value
         assists = db.assists.value
-        permanentBuffs = db.permanentBuff.map{buff in PermanentBuff(from: buff) }
+        permanentBuffs = db.permanentBuffs.map{buff in PermanentBuff(from: buff) }
         backpack0 = db.backpack0.value
         backpack1 = db.backpack1.value
         backpack2 = db.backpack2.value

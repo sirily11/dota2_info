@@ -214,7 +214,8 @@ struct Lhten: Codable {
 }
 
 // MARK: - PermanentBuff
-struct PermanentBuff: Codable {
+struct PermanentBuff: Codable, Identifiable {
+    let id = UUID()
     let permanentBuff, stackCount: Int?
 
     enum CodingKeys: String, CodingKey {

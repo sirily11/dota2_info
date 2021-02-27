@@ -28,6 +28,12 @@ struct DetailInfoPage: View {
                                 Divider()
                                 PlayerChartView(player: selectedPlayer)
                                 
+                                Text("Killed By")
+                                    .font(.title)
+                                    .padding([.vertical])
+                                Divider()
+                                KilledByLogView(player: selectedPlayer)
+                                
                                 Text("Purchase Logs")
                                     .font(.title)
                                     .padding([.vertical])

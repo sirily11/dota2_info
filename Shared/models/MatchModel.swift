@@ -40,7 +40,7 @@ class MatchModel : ObservableObject{
     
     init() {
         print("File URL: \(Realm.Configuration.defaultConfiguration.fileURL!)")
-        let config = Realm.Configuration(schemaVersion: 5)
+        let config = Realm.Configuration(schemaVersion: 6)
         Realm.Configuration.defaultConfiguration = config
         self.realm = try! Realm()
     }
